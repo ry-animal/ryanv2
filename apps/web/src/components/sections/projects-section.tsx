@@ -6,7 +6,6 @@ import { ProjectCard } from "@/components/interactive/project-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-// Mock data for now - we'll replace this with actual tRPC data fetching
 const mockProjects = [
     {
         id: 1,
@@ -44,8 +43,6 @@ const mockProjects = [
 ];
 
 export default function ProjectsSection() {
-    // In the future, we'll fetch from tRPC:
-    // const projects = await trpc.portfolio.getProjects.query({ featured: true });
     const projects = mockProjects.filter(p => p.featured);
 
     return (
@@ -62,7 +59,6 @@ export default function ProjectsSection() {
                     </ScrollReveal>
                 </div>
 
-                {/* Projects Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     {projects.map((project, index) => (
                         <ScrollReveal key={project.id} delay={index * 0.1}>
@@ -71,7 +67,6 @@ export default function ProjectsSection() {
                     ))}
                 </div>
 
-                {/* View All Projects Button */}
                 <ScrollReveal delay={0.4}>
                     <div className="text-center">
                         <Button size="lg" variant="outline" asChild>

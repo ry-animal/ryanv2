@@ -1,16 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { Metadata } from "next";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { ProjectCard } from "@/components/interactive/project-card";
 import { ScrollReveal } from "@/components/interactive/scroll-reveal";
-import { Button } from "@/components/ui/button";
+import { ProjectFilter } from "@/components/interactive/project-filter";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Search, Filter } from "lucide-react";
-
-// Mock projects data - in production, this would come from your database/CMS
+import { motion, AnimatePresence } from "framer-motion";
 const allProjects = [
     {
         id: 1,
@@ -92,32 +89,43 @@ const allProjects = [
     },
 ];
 
-const categories = ["All", "Full-Stack", "Frontend", "Backend"];
-const statuses = ["All", "Completed", "In Progress"];
+
 
 export default function ProjectsPage() {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("All");
-    const [selectedStatus, setSelectedStatus] = useState("All");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedTech, setSelectedTech] = useState<string[]>([]);
 
-    // Filter projects based on search and filters
-    const filteredProjects = allProjects.filter(project => {
-        const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            JSON.parse(project.technologies).some((tech: string) =>
-                tech.toLowerCase().includes(searchTerm.toLowerCase())
-            );
+    const allTechnologies = useMemo(() => {
+        const techSet = new Set<string>();
+        allProjects.forEach(project => {
+            const techs = JSON.parse(project.technologies) as string[];
+            techs.forEach(tech => techSet.add(tech));
+        });
+        return Array.from(techSet).sort();
+    }, []);
 
-        const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
-        const matchesStatus = selectedStatus === "All" || project.status === selectedStatus;
+    const filteredProjects = useMemo(() => {
+        return allProjects.filter(project => {
+            const matchesSearch = searchQuery === "" ||
+                project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                project.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-        return matchesSearch && matchesCategory && matchesStatus;
-    });
+            const projectTechs = JSON.parse(project.technologies) as string[];
+            const matchesTech = selectedTech.length === 0 ||
+                selectedTech.some(tech => projectTechs.includes(tech));
+
+            return matchesSearch && matchesTech;
+        });
+    }, [searchQuery, selectedTech]);
+
+    const handleClearFilters = () => {
+        setSearchQuery("");
+        setSelectedTech([]);
+    };
 
     return (
         <main className="py-20">
             <ResponsiveContainer>
-                {/* Page Header */}
                 <div className="text-center mb-16">
                     <ScrollReveal>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
@@ -130,59 +138,18 @@ export default function ProjectsPage() {
                     </ScrollReveal>
                 </div>
 
-                {/* Filters and Search */}
                 <ScrollReveal delay={0.2}>
-                    <div className="mb-12 space-y-6">
-                        {/* Search */}
-                        <div className="relative max-w-md mx-auto">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <Input
-                                type="text"
-                                placeholder="Search projects..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="pl-10"
-                            />
-                        </div>
+                    <div className="mb-12">
+                        <ProjectFilter
+                            technologies={allTechnologies}
+                            selectedTech={selectedTech}
+                            searchQuery={searchQuery}
+                            onTechChange={setSelectedTech}
+                            onSearchChange={setSearchQuery}
+                            onClear={handleClearFilters}
+                        />
 
-                        {/* Filters */}
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <div className="flex items-center gap-2">
-                                <Filter className="h-4 w-4 text-muted-foreground" />
-                                <span className="text-sm font-medium">Filters:</span>
-                            </div>
-
-                            {/* Category Filter */}
-                            <div className="flex flex-wrap gap-2">
-                                {categories.map((category) => (
-                                    <Button
-                                        key={category}
-                                        variant={selectedCategory === category ? "default" : "outline"}
-                                        size="sm"
-                                        onClick={() => setSelectedCategory(category)}
-                                    >
-                                        {category}
-                                    </Button>
-                                ))}
-                            </div>
-
-                            {/* Status Filter */}
-                            <div className="flex flex-wrap gap-2">
-                                {statuses.map((status) => (
-                                    <Button
-                                        key={status}
-                                        variant={selectedStatus === status ? "default" : "outline"}
-                                        size="sm"
-                                        onClick={() => setSelectedStatus(status)}
-                                    >
-                                        {status}
-                                    </Button>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Results Count */}
-                        <div className="text-center text-sm text-muted-foreground">
+                        <div className="text-center text-sm text-muted-foreground mt-6">
                             {filteredProjects.length === allProjects.length
                                 ? `Showing all ${allProjects.length} projects`
                                 : `Showing ${filteredProjects.length} of ${allProjects.length} projects`
@@ -191,7 +158,6 @@ export default function ProjectsPage() {
                     </div>
                 </ScrollReveal>
 
-                {/* Projects Grid */}
                 {filteredProjects.length > 0 ? (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filteredProjects.map((project, index) => (
@@ -202,23 +168,17 @@ export default function ProjectsPage() {
                     </div>
                 ) : (
                     <ScrollReveal>
-                        <div className="text-center py-12">
+                        <motion.div
+                            className="text-center py-12"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                        >
                             <div className="text-6xl mb-4">🔍</div>
                             <h3 className="text-xl font-semibold mb-2">No projects found</h3>
                             <p className="text-muted-foreground mb-6">
                                 Try adjusting your search terms or filters to find what you're looking for.
                             </p>
-                            <Button
-                                onClick={() => {
-                                    setSearchTerm("");
-                                    setSelectedCategory("All");
-                                    setSelectedStatus("All");
-                                }}
-                                variant="outline"
-                            >
-                                Clear all filters
-                            </Button>
-                        </div>
+                        </motion.div>
                     </ScrollReveal>
                 )}
             </ResponsiveContainer>

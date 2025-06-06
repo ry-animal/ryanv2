@@ -8,6 +8,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { MobileNav } from "@/components/interactive/mobile-nav";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { smoothScrollTo } from "@/utils/smooth-scroll";
+import { Download } from "lucide-react";
 
 const navItems = [
     { href: "#about", label: "About" },
@@ -97,8 +98,22 @@ export function Header() {
                         ))}
                     </nav>
 
-                    {/* Right side actions */}
                     <div className="flex items-center space-x-4">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            asChild
+                            className="hidden sm:flex"
+                        >
+                            <a
+                                href="/resume.pdf"
+                                download="Ryan_Van_Valkenburg_Resume.pdf"
+                                className="flex items-center gap-2"
+                            >
+                                <Download className="h-4 w-4" />
+                                Resume
+                            </a>
+                        </Button>
                         <ModeToggle />
                         <MobileNav />
                     </div>

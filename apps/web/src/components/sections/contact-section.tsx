@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Download } from "lucide-react";
 import { toast } from "sonner";
 
 // Form data type
@@ -194,9 +194,26 @@ export default function ContactSection() {
                                 </ScrollReveal>
                             ))}
                         </div>
+
+                        <ScrollReveal delay={0.4}>
+                            <Button
+                                variant="default"
+                                size="lg"
+                                asChild
+                                className="w-full"
+                            >
+                                <a
+                                    href="/resume.pdf"
+                                    download="Ryan_Van_Valkenburg_Resume.pdf"
+                                    className="flex items-center gap-2"
+                                >
+                                    <Download className="h-5 w-5" />
+                                    Download Resume
+                                </a>
+                            </Button>
+                        </ScrollReveal>
                     </div>
 
-                    {/* Contact Form */}
                     <ScrollReveal delay={0.2}>
                         <Card>
                             <CardHeader>
@@ -208,7 +225,6 @@ export default function ContactSection() {
                             <CardContent>
                                 <form onSubmit={handleSubmit} className="space-y-4">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {/* Name Field */}
                                         <div className="space-y-2">
                                             <Label htmlFor="name">Name</Label>
                                             <Input
@@ -225,7 +241,6 @@ export default function ContactSection() {
                                             )}
                                         </div>
 
-                                        {/* Email Field */}
                                         <div className="space-y-2">
                                             <Label htmlFor="email">Email</Label>
                                             <Input
@@ -244,7 +259,6 @@ export default function ContactSection() {
                                         </div>
                                     </div>
 
-                                    {/* Subject Field */}
                                     <div className="space-y-2">
                                         <Label htmlFor="subject">Subject</Label>
                                         <Input
@@ -261,7 +275,6 @@ export default function ContactSection() {
                                         )}
                                     </div>
 
-                                    {/* Message Field */}
                                     <div className="space-y-2">
                                         <Label htmlFor="message">Message</Label>
                                         <Textarea

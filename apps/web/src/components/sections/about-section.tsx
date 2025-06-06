@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
-// Mock skills data - will be replaced with tRPC data later
 const skillsData = {
     frontend: [
         { name: "React/Next.js", level: 95 },
@@ -42,7 +41,6 @@ export default function AboutSection() {
         <section id="about" className="py-20 lg:py-32 bg-muted/30">
             <ResponsiveContainer>
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    {/* Left side - Bio and Stats */}
                     <div className="space-y-8">
                         <ScrollReveal>
                             <div className="space-y-6">
@@ -70,7 +68,6 @@ export default function AboutSection() {
                             </div>
                         </ScrollReveal>
 
-                        {/* Stats */}
                         <div className="grid grid-cols-2 gap-6">
                             {stats.map((stat, index) => (
                                 <AnimatedCounter
@@ -83,7 +80,6 @@ export default function AboutSection() {
                         </div>
                     </div>
 
-                    {/* Right side - Skills */}
                     <div className="space-y-8">
                         <ScrollReveal delay={0.1}>
                             <h3 className="text-2xl md:text-3xl font-bold text-center lg:text-left">
@@ -91,7 +87,6 @@ export default function AboutSection() {
                             </h3>
                         </ScrollReveal>
 
-                        {/* Frontend Skills */}
                         <ScrollReveal delay={0.2}>
                             <Card>
                                 <CardContent className="p-6">
@@ -121,7 +116,6 @@ export default function AboutSection() {
                             </Card>
                         </ScrollReveal>
 
-                        {/* Backend Skills */}
                         <ScrollReveal delay={0.3}>
                             <Card>
                                 <CardContent className="p-6">
@@ -151,7 +145,6 @@ export default function AboutSection() {
                             </Card>
                         </ScrollReveal>
 
-                        {/* Tools & Technologies */}
                         <ScrollReveal delay={0.4}>
                             <Card>
                                 <CardContent className="p-6">

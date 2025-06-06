@@ -1,0 +1,29 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f8fafc"/>
+  <rect x="1" y="1" width="798" height="598" stroke="#e2e8f0" stroke-width="2" fill="none"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Center content -->
+  <g transform="translate(400, 300)">
+    <!-- Large camera icon -->
+    <rect x="-60" y="-40" width="120" height="80" rx="8" fill="#cbd5e1"/>
+    <circle cx="0" cy="0" r="25" fill="#94a3b8"/>
+    <circle cx="0" cy="0" r="15" fill="#64748b"/>
+    <rect x="-45" y="-25" width="15" height="10" rx="2" fill="#94a3b8"/>
+    
+    <!-- Text -->
+    <text x="0" y="60" text-anchor="middle" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="500">
+      Project Preview
+    </text>
+    <text x="0" y="85" text-anchor="middle" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="14">
+      Add your project screenshot here
+    </text>
+  </g>
+</svg> 

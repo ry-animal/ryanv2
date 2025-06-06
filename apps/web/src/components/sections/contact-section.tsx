@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { ScrollReveal } from "@/components/interactive/scroll-reveal";
 import { Button } from "@/components/ui/button";
@@ -10,6 +12,31 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
+
+// Zod schema for form validation
+const contactFormSchema = z.object({
+    name: z
+        .string()
+        .min(1, "Name is required")
+        .min(2, "Name must be at least 2 characters")
+        .max(50, "Name must be less than 50 characters"),
+    email: z
+        .string()
+        .min(1, "Email is required")
+        .email("Please enter a valid email address"),
+    subject: z
+        .string()
+        .min(1, "Subject is required")
+        .min(5, "Subject must be at least 5 characters")
+        .max(100, "Subject must be less than 100 characters"),
+    message: z
+        .string()
+        .min(1, "Message is required")
+        .min(10, "Message must be at least 10 characters")
+        .max(1000, "Message must be less than 1000 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const contactInfo = [
     {
@@ -33,42 +60,34 @@ const contactInfo = [
 ];
 
 export default function ContactSection() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitting },
+    } = useForm<ContactFormData>({
+        resolver: zodResolver(contactFormSchema),
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleInputChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-
+    const onSubmit = async (data: ContactFormData) => {
         try {
-            // TODO: Implement actual form submission to your server
-            // const response = await fetch('/api/contact', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify(formData),
-            // });
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
 
-            // Simulate API call for now
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const result = await response.json();
 
-            toast.success("Message sent successfully! I'll get back to you soon.");
-            setFormData({ name: "", email: "", subject: "", message: "" });
+            if (!response.ok) {
+                throw new Error(result.error || 'Failed to send message');
+            }
+
+            toast.success(result.message || "Message sent successfully! I'll get back to you soon.");
+            reset();
         } catch (error) {
-            toast.error("Failed to send message. Please try again.");
-        } finally {
-            setIsSubmitting(false);
+            console.error('Contact form error:', error);
+            toast.error(error instanceof Error ? error.message : "Failed to send message. Please try again.");
         }
     };
 
@@ -139,58 +158,76 @@ export default function ContactSection() {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <form onSubmit={handleSubmit} className="space-y-4">
+                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {/* Name Field */}
                                         <div className="space-y-2">
                                             <Label htmlFor="name">Name</Label>
                                             <Input
                                                 id="name"
-                                                name="name"
-                                                value={formData.name}
-                                                onChange={handleInputChange}
+                                                {...register("name")}
                                                 placeholder="Your name"
-                                                required
+                                                className={errors.name ? "border-red-500" : ""}
                                             />
+                                            {errors.name && (
+                                                <p className="text-sm text-red-500">
+                                                    {errors.name.message}
+                                                </p>
+                                            )}
                                         </div>
+
+                                        {/* Email Field */}
                                         <div className="space-y-2">
                                             <Label htmlFor="email">Email</Label>
                                             <Input
                                                 id="email"
-                                                name="email"
                                                 type="email"
-                                                value={formData.email}
-                                                onChange={handleInputChange}
+                                                {...register("email")}
                                                 placeholder="your.email@example.com"
-                                                required
+                                                className={errors.email ? "border-red-500" : ""}
                                             />
+                                            {errors.email && (
+                                                <p className="text-sm text-red-500">
+                                                    {errors.email.message}
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
 
+                                    {/* Subject Field */}
                                     <div className="space-y-2">
                                         <Label htmlFor="subject">Subject</Label>
                                         <Input
                                             id="subject"
-                                            name="subject"
-                                            value={formData.subject}
-                                            onChange={handleInputChange}
+                                            {...register("subject")}
                                             placeholder="What's this about?"
-                                            required
+                                            className={errors.subject ? "border-red-500" : ""}
                                         />
+                                        {errors.subject && (
+                                            <p className="text-sm text-red-500">
+                                                {errors.subject.message}
+                                            </p>
+                                        )}
                                     </div>
 
+                                    {/* Message Field */}
                                     <div className="space-y-2">
                                         <Label htmlFor="message">Message</Label>
                                         <Textarea
                                             id="message"
-                                            name="message"
-                                            value={formData.message}
-                                            onChange={handleInputChange}
+                                            {...register("message")}
                                             placeholder="Tell me about your project or just say hello!"
                                             rows={6}
-                                            required
+                                            className={errors.message ? "border-red-500" : ""}
                                         />
+                                        {errors.message && (
+                                            <p className="text-sm text-red-500">
+                                                {errors.message.message}
+                                            </p>
+                                        )}
                                     </div>
 
+                                    {/* Submit Button */}
                                     <Button
                                         type="submit"
                                         disabled={isSubmitting}

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { ScrollReveal } from "@/components/interactive/scroll-reveal";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Twitter, X } from "lucide-react";
 import Link from "next/link";
 import { smoothScrollTo } from "@/utils/smooth-scroll";
 
@@ -42,7 +42,7 @@ export default function HeroSection() {
                                     </Link>
                                 </Button>
                                 <Button variant="outline" size="lg" asChild className="min-w-[140px]">
-                                    <Link href="/contact">
+                                    <Link href="#contact">
                                         Get In Touch
                                     </Link>
                                 </Button>
@@ -74,7 +74,17 @@ export default function HeroSection() {
                                 </Button>
                                 <Button variant="ghost" size="icon" asChild>
                                     <a
-                                        href="mailto:ryan@ryanvv.com"
+                                        href="https://x.com/ryanlvv"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="X"
+                                    >
+                                        <Twitter className="h-5 w-5" />
+                                    </a>
+                                </Button>
+                                <Button variant="ghost" size="icon" asChild>
+                                    <a
+                                        href="mailto:ryanlvv@gmail.com"
                                         aria-label="Email"
                                     >
                                         <Mail className="h-5 w-5" />

@@ -2,7 +2,7 @@
 
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUp, Phone, Twitter } from "lucide-react";
 import Link from "next/link";
 import { smoothScrollToTop } from "@/utils/smooth-scroll";
 
@@ -31,8 +31,18 @@ const navigation = {
         },
         {
             name: "Email",
-            href: "mailto:ryan@ryanvv.com",
+            href: "mailto:ryanlvv@gmail.com",
             icon: Mail,
+        },
+        {
+            name: "Phone",
+            href: "tel:+12066503536",
+            icon: Phone,
+        },
+        {
+            name: "X",
+            href: "https://x.com/ryanlvv",
+            icon: Twitter,
         },
     ],
 };
@@ -122,9 +132,9 @@ export function Footer() {
                                 variant="outline"
                                 size="sm"
                                 onClick={scrollToTop}
-                                className="block"
+                                className="block text-xs flex items-center gap-1"
                             >
-                                <ArrowUp className="mr-2 h-4 w-4" />
+                                <ArrowUp className="h-2 w-2" />
                                 Back to Top
                             </Button>
                         </div>

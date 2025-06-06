@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/interactive/scroll-progress";
 import { WebVitals } from "@/components/analytics/web-vitals";
 import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from "sonner";
 import Providers from "@/components/providers";
 import { generateMetadata, generatePersonStructuredData, generateWebsiteStructuredData } from "@/components/seo/meta-tags";
 
@@ -65,6 +66,7 @@ export default function RootLayout({
 					<Header />
 					{children}
 					<Footer />
+					<Toaster position="bottom-right" richColors />
 				</Providers>
 			</body>
 		</html>

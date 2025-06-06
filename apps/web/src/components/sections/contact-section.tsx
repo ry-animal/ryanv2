@@ -1,8 +1,6 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useState } from "react";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { ScrollReveal } from "@/components/interactive/scroll-reveal";
 import { Button } from "@/components/ui/button";
@@ -13,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 
-// Simplified form data type
+// Form data type
 interface ContactFormData {
     name: string;
     email: string;
@@ -21,13 +19,31 @@ interface ContactFormData {
     message: string;
 }
 
-// Zod schema for form validation
-const contactFormSchema = z.object({
-    name: z.string().min(2, "Name must be at least 2 characters").max(50, "Name must be less than 50 characters"),
-    email: z.string().email("Please enter a valid email address"),
-    subject: z.string().min(5, "Subject must be at least 5 characters").max(100, "Subject must be less than 100 characters"),
-    message: z.string().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
-});
+// Simple validation functions
+const validateName = (name: string): string | null => {
+    if (!name || name.length < 2) return "Name must be at least 2 characters";
+    if (name.length > 50) return "Name must be less than 50 characters";
+    return null;
+};
+
+const validateEmail = (email: string): string | null => {
+    if (!email) return "Email is required";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return "Please enter a valid email address";
+    return null;
+};
+
+const validateSubject = (subject: string): string | null => {
+    if (!subject || subject.length < 5) return "Subject must be at least 5 characters";
+    if (subject.length > 100) return "Subject must be less than 100 characters";
+    return null;
+};
+
+const validateMessage = (message: string): string | null => {
+    if (!message || message.length < 10) return "Message must be at least 10 characters";
+    if (message.length > 1000) return "Message must be less than 1000 characters";
+    return null;
+};
 
 const contactInfo = [
     {
@@ -51,21 +67,49 @@ const contactInfo = [
 ];
 
 export default function ContactSection() {
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors, isSubmitting },
-    } = useForm<ContactFormData>({
-        resolver: zodResolver(contactFormSchema),
+    const [formData, setFormData] = useState<ContactFormData>({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
     });
 
-    const onSubmit = async (data: ContactFormData) => {
+    const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const validateForm = (): boolean => {
+        const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
+
+        const nameError = validateName(formData.name);
+        if (nameError) newErrors.name = nameError;
+
+        const emailError = validateEmail(formData.email);
+        if (emailError) newErrors.email = emailError;
+
+        const subjectError = validateSubject(formData.subject);
+        if (subjectError) newErrors.subject = subjectError;
+
+        const messageError = validateMessage(formData.message);
+        if (messageError) newErrors.message = messageError;
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsSubmitting(true);
+
         try {
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                body: JSON.stringify(formData),
             });
 
             const result = await response.json();
@@ -75,10 +119,23 @@ export default function ContactSection() {
             }
 
             toast.success(result.message || "Message sent successfully! I'll get back to you soon.");
-            reset();
+            setFormData({ name: "", email: "", subject: "", message: "" });
+            setErrors({});
         } catch (error) {
             console.error('Contact form error:', error);
             toast.error(error instanceof Error ? error.message : "Failed to send message. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleChange = (field: keyof ContactFormData) => (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setFormData(prev => ({ ...prev, [field]: e.target.value }));
+        // Clear error when user starts typing
+        if (errors[field]) {
+            setErrors(prev => ({ ...prev, [field]: undefined }));
         }
     };
 
@@ -149,20 +206,21 @@ export default function ContactSection() {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                                <form onSubmit={handleSubmit} className="space-y-4">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         {/* Name Field */}
                                         <div className="space-y-2">
                                             <Label htmlFor="name">Name</Label>
                                             <Input
                                                 id="name"
-                                                {...register("name")}
+                                                value={formData.name}
+                                                onChange={handleChange("name")}
                                                 placeholder="Your name"
                                                 className={errors.name ? "border-red-500" : ""}
                                             />
                                             {errors.name && (
                                                 <p className="text-sm text-red-500">
-                                                    {errors.name.message}
+                                                    {errors.name}
                                                 </p>
                                             )}
                                         </div>
@@ -173,13 +231,14 @@ export default function ContactSection() {
                                             <Input
                                                 id="email"
                                                 type="email"
-                                                {...register("email")}
+                                                value={formData.email}
+                                                onChange={handleChange("email")}
                                                 placeholder="your.email@example.com"
                                                 className={errors.email ? "border-red-500" : ""}
                                             />
                                             {errors.email && (
                                                 <p className="text-sm text-red-500">
-                                                    {errors.email.message}
+                                                    {errors.email}
                                                 </p>
                                             )}
                                         </div>
@@ -190,13 +249,14 @@ export default function ContactSection() {
                                         <Label htmlFor="subject">Subject</Label>
                                         <Input
                                             id="subject"
-                                            {...register("subject")}
+                                            value={formData.subject}
+                                            onChange={handleChange("subject")}
                                             placeholder="What's this about?"
                                             className={errors.subject ? "border-red-500" : ""}
                                         />
                                         {errors.subject && (
                                             <p className="text-sm text-red-500">
-                                                {errors.subject.message}
+                                                {errors.subject}
                                             </p>
                                         )}
                                     </div>
@@ -206,14 +266,15 @@ export default function ContactSection() {
                                         <Label htmlFor="message">Message</Label>
                                         <Textarea
                                             id="message"
-                                            {...register("message")}
+                                            value={formData.message}
+                                            onChange={handleChange("message")}
                                             placeholder="Tell me about your project or just say hello!"
                                             rows={6}
                                             className={errors.message ? "border-red-500" : ""}
                                         />
                                         {errors.message && (
                                             <p className="text-sm text-red-500">
-                                                {errors.message.message}
+                                                {errors.message}
                                             </p>
                                         )}
                                     </div>

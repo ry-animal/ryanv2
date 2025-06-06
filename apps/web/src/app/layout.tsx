@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/interactive/scroll-progress";
 import { WebVitals } from "@/components/analytics/web-vitals";
+import { Analytics } from "@vercel/analytics/next"
 import Providers from "@/components/providers";
 import { generateMetadata, generatePersonStructuredData, generateWebsiteStructuredData } from "@/components/seo/meta-tags";
 
@@ -59,6 +60,7 @@ export default function RootLayout({
 			>
 				<Providers>
 					<WebVitals />
+					<Analytics />
 					<ScrollProgress />
 					<Header />
 					{children}

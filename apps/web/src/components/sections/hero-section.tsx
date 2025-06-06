@@ -27,8 +27,8 @@ export default function HeroSection() {
                         {/* Description */}
                         <ScrollReveal delay={0.2}>
                             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                                I craft beautiful, performant web applications with modern technologies.
-                                Passionate about creating seamless user experiences and scalable solutions.
+                                Senior Full-Stack Developer specializing in React, Next.js, and TypeScript.
+                                I build scalable web applications with exceptional user experiences and clean, maintainable code.
                             </p>
                         </ScrollReveal>
 
@@ -53,7 +53,7 @@ export default function HeroSection() {
                             <div className="flex justify-center gap-6 pt-8">
                                 <Button variant="ghost" size="icon" asChild>
                                     <a
-                                        href="https://github.com"
+                                        href="https://github.com/ry-animal"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label="GitHub"
@@ -63,7 +63,7 @@ export default function HeroSection() {
                                 </Button>
                                 <Button variant="ghost" size="icon" asChild>
                                     <a
-                                        href="https://linkedin.com"
+                                        href="https://www.linkedin.com/in/ryanlvv/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label="LinkedIn"
@@ -73,7 +73,7 @@ export default function HeroSection() {
                                 </Button>
                                 <Button variant="ghost" size="icon" asChild>
                                     <a
-                                        href="mailto:hello@example.com"
+                                        href="mailto:ryan@ryanvv.com"
                                         aria-label="Email"
                                     >
                                         <Mail className="h-5 w-5" />

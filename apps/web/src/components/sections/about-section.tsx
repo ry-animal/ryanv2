@@ -10,29 +10,29 @@ import { Progress } from "@/components/ui/progress";
 const skillsData = {
     frontend: [
         { name: "React/Next.js", level: 95 },
-        { name: "TypeScript", level: 90 },
-        { name: "Tailwind CSS", level: 95 },
-        { name: "Framer Motion", level: 85 },
+        { name: "TypeScript", level: 92 },
+        { name: "Tailwind CSS", level: 90 },
+        { name: "JavaScript ES6+", level: 95 },
     ],
     backend: [
-        { name: "Node.js", level: 90 },
-        { name: "tRPC", level: 85 },
-        { name: "PostgreSQL", level: 80 },
-        { name: "Drizzle ORM", level: 85 },
+        { name: "Node.js", level: 88 },
+        { name: "PostgreSQL", level: 85 },
+        { name: "tRPC", level: 80 },
+        { name: "Prisma/Drizzle", level: 82 },
     ],
     tools: [
         { name: "Git", level: 95 },
-        { name: "Docker", level: 75 },
-        { name: "Figma", level: 80 },
-        { name: "VS Code", level: 95 },
+        { name: "Docker", level: 78 },
+        { name: "AWS", level: 75 },
+        { name: "Vercel", level: 90 },
     ],
 };
 
 const stats = [
-    { label: "Years of Experience", value: "5+" },
-    { label: "Projects Completed", value: "50+" },
-    { label: "Technologies Mastered", value: "20+" },
-    { label: "Happy Clients", value: "30+" },
+    { label: "Years of Experience", value: "8+" },
+    { label: "Projects Delivered", value: "40+" },
+    { label: "Technologies", value: "15+" },
+    { label: "Team Projects", value: "25+" },
 ];
 
 export default function AboutSection() {
@@ -49,21 +49,20 @@ export default function AboutSection() {
                                 </h2>
                                 <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                                     <p>
-                                        I'm a passionate full-stack developer with over 5 years of experience
-                                        creating beautiful, functional, and user-centered digital experiences.
-                                        My journey started with curiosity about how websites work, and it has
-                                        evolved into a love for crafting efficient, scalable solutions.
+                                        I'm a senior full-stack developer with 8+ years of experience building
+                                        high-performance web applications that scale. I've led development teams,
+                                        architected complex systems, and delivered products used by thousands of users.
                                     </p>
                                     <p>
-                                        I specialize in modern web technologies, with expertise in React,
-                                        Next.js, TypeScript, and Node.js. I'm passionate about creating
-                                        seamless user experiences, writing clean code, and staying up-to-date
-                                        with the latest industry trends and best practices.
+                                        My expertise spans the entire web development stack, with deep knowledge in
+                                        React, Next.js, TypeScript, and Node.js. I'm passionate about performance
+                                        optimization, user experience design, and building maintainable code that
+                                        teams can collaborate on effectively.
                                     </p>
                                     <p>
-                                        When I'm not coding, you can find me exploring new technologies,
-                                        contributing to open-source projects, or sharing knowledge with the
-                                        developer community.
+                                        I believe in continuous learning and staying current with emerging technologies.
+                                        When I'm not coding, I enjoy mentoring junior developers and contributing to
+                                        the open-source community.
                                     </p>
                                 </div>
                             </div>

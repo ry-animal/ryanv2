@@ -14,23 +14,23 @@ const navigation = {
     ],
     projects: [
         { name: "All Projects", href: "/projects" },
-        { name: "Portfolio Website", href: "/projects/better-t-stack-portfolio" },
-        { name: "E-commerce Platform", href: "/projects/ecommerce-platform" },
+        { name: "Modern Portfolio", href: "/projects/better-t-stack-portfolio" },
+        { name: "SaaS Dashboard", href: "/projects/saas-dashboard" },
     ],
     social: [
         {
             name: "GitHub",
-            href: "https://github.com/ryanvanValkenburg",
+            href: "https://github.com/ry-animal",
             icon: Github,
         },
         {
             name: "LinkedIn",
-            href: "https://linkedin.com/in/ryanvanValkenburg",
+            href: "https://www.linkedin.com/in/ryanlvv/",
             icon: Linkedin,
         },
         {
             name: "Email",
-            href: "mailto:hello@ryanvanValkenburg.com",
+            href: "mailto:ryan@ryanvv.com",
             icon: Mail,
         },
     ],

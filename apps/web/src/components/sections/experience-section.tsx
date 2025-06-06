@@ -10,39 +10,39 @@ import { Calendar, MapPin } from "lucide-react";
 const experienceData = [
     {
         id: 1,
-        company: "Tech Innovations Inc.",
+        company: "Freelance & Contract Work",
         position: "Senior Full-Stack Developer",
-        location: "San Francisco, CA",
+        location: "Remote",
         startDate: "Jan 2022",
         endDate: "Present",
         current: true,
-        description: "Lead developer for high-traffic web applications serving 100k+ users. Architected and implemented microservices using Node.js, React, and PostgreSQL. Mentored junior developers and established best practices for code quality and testing.",
-        technologies: ["React", "Next.js", "Node.js", "PostgreSQL", "AWS", "Docker"],
-        logoUrl: "/images/company-1.jpg"
+        description: "Lead developer for multiple high-impact projects serving 50k+ users. Specialized in building scalable web applications using modern React ecosystem. Delivered end-to-end solutions from architecture design to deployment, working directly with clients to exceed expectations.",
+        technologies: ["React", "Next.js", "TypeScript", "PostgreSQL", "Vercel", "tRPC"],
+        logoUrl: "/images/freelance.jpg"
     },
     {
         id: 2,
-        company: "StartupLab",
+        company: "Digital Agency",
         position: "Full-Stack Developer",
         location: "Remote",
-        startDate: "Mar 2020",
+        startDate: "Mar 2019",
         endDate: "Dec 2021",
         current: false,
-        description: "Built and maintained multiple client applications from concept to deployment. Developed responsive web applications using React and TypeScript. Collaborated with design teams to implement pixel-perfect UI components.",
-        technologies: ["React", "TypeScript", "Express", "MongoDB", "Tailwind CSS"],
-        logoUrl: "/images/company-2.jpg"
+        description: "Built responsive web applications for enterprise clients across various industries. Collaborated with cross-functional teams to deliver pixel-perfect implementations. Optimized application performance and established development workflows that improved team productivity by 40%.",
+        technologies: ["React", "TypeScript", "Node.js", "MongoDB", "Tailwind CSS", "AWS"],
+        logoUrl: "/images/agency.jpg"
     },
     {
         id: 3,
-        company: "WebCraft Solutions",
+        company: "Tech Startup",
         position: "Frontend Developer",
-        location: "Austin, TX",
-        startDate: "Jun 2019",
-        endDate: "Feb 2020",
+        location: "San Francisco, CA",
+        startDate: "Jun 2016",
+        endDate: "Feb 2019",
         current: false,
-        description: "Specialized in creating engaging user interfaces and improving user experience. Converted design mockups into responsive, interactive web applications. Optimized application performance and implemented accessibility standards.",
-        technologies: ["JavaScript", "React", "CSS3", "Sass", "Webpack"],
-        logoUrl: "/images/company-3.jpg"
+        description: "Developed user-facing features for a fast-growing SaaS platform. Focused on creating intuitive user interfaces and smooth user experiences. Implemented comprehensive testing strategies and accessibility standards that improved user engagement by 25%.",
+        technologies: ["JavaScript", "React", "Redux", "CSS3", "Webpack", "Jest"],
+        logoUrl: "/images/startup.jpg"
     },
 ];
 

@@ -1,0 +1,4 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "cd ../.. && bun install && bun run build --filter=web"
+} 

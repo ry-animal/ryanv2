@@ -78,7 +78,7 @@ export function Header() {
                             <button
                                 key={item.href}
                                 onClick={() => handleNavClick(item.href)}
-                                className={`text-sm font-medium transition-colors relative group ${activeSection === item.href
+                                className={`text-sm font-medium transition-colors relative group cursor-pointer ${activeSection === item.href
                                     ? "text-primary"
                                     : "hover:text-primary"
                                     }`}

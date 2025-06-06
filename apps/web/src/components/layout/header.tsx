@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { MobileNav } from "@/components/interactive/mobile-nav";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
+import { smoothScrollTo } from "@/utils/smooth-scroll";
 
 const navItems = [
     { href: "#about", label: "About" },
@@ -17,15 +18,37 @@ const navItems = [
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState("");
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10);
+
+            // Update active section based on scroll position
+            const sections = navItems.map(item => item.href.replace('#', ''));
+            const currentSection = sections.find(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    return rect.top <= 100 && rect.bottom >= 100;
+                }
+                return false;
+            });
+
+            if (currentSection) {
+                setActiveSection(`#${currentSection}`);
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    const handleNavClick = (href: string) => {
+        if (href.startsWith('#')) {
+            smoothScrollTo(href);
+        }
+    };
 
     return (
         <motion.header
@@ -52,14 +75,25 @@ export function Header() {
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center space-x-8">
                         {navItems.map((item) => (
-                            <Link
+                            <button
                                 key={item.href}
-                                href={item.href}
-                                className="text-sm font-medium hover:text-primary transition-colors relative group"
+                                onClick={() => handleNavClick(item.href)}
+                                className={`text-sm font-medium transition-colors relative group ${activeSection === item.href
+                                    ? "text-primary"
+                                    : "hover:text-primary"
+                                    }`}
                             >
                                 {item.label}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-                            </Link>
+                                <motion.span
+                                    className="absolute -bottom-1 left-0 h-0.5 bg-primary"
+                                    initial={{ width: 0 }}
+                                    animate={{
+                                        width: activeSection === item.href ? "100%" : 0
+                                    }}
+                                    whileHover={{ width: "100%" }}
+                                    transition={{ duration: 0.2 }}
+                                />
+                            </button>
                         ))}
                     </nav>
 

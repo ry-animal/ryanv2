@@ -1,7 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { ScrollReveal } from "@/components/interactive/scroll-reveal";
+import { AnimatedCounter } from "@/components/interactive/animated-counter";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -69,20 +71,16 @@ export default function AboutSection() {
                         </ScrollReveal>
 
                         {/* Stats */}
-                        <ScrollReveal delay={0.2}>
-                            <div className="grid grid-cols-2 gap-6">
-                                {stats.map((stat, index) => (
-                                    <div key={stat.label} className="text-center">
-                                        <div className="text-2xl md:text-3xl font-bold text-primary mb-2">
-                                            {stat.value}
-                                        </div>
-                                        <div className="text-sm text-muted-foreground">
-                                            {stat.label}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </ScrollReveal>
+                        <div className="grid grid-cols-2 gap-6">
+                            {stats.map((stat, index) => (
+                                <AnimatedCounter
+                                    key={stat.label}
+                                    value={stat.value}
+                                    label={stat.label}
+                                    duration={2 + index * 0.2}
+                                />
+                            ))}
+                        </div>
                     </div>
 
                     {/* Right side - Skills */}
@@ -102,14 +100,21 @@ export default function AboutSection() {
                                         Frontend Development
                                     </h4>
                                     <div className="space-y-4">
-                                        {skillsData.frontend.map((skill) => (
-                                            <div key={skill.name} className="space-y-2">
+                                        {skillsData.frontend.map((skill, index) => (
+                                            <motion.div
+                                                key={skill.name}
+                                                className="space-y-2"
+                                                initial={{ opacity: 0, x: -20 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: index * 0.1, duration: 0.5 }}
+                                                viewport={{ once: true }}
+                                            >
                                                 <div className="flex justify-between text-sm">
                                                     <span>{skill.name}</span>
                                                     <span className="text-muted-foreground">{skill.level}%</span>
                                                 </div>
                                                 <Progress value={skill.level} className="h-2" />
-                                            </div>
+                                            </motion.div>
                                         ))}
                                     </div>
                                 </CardContent>
@@ -125,14 +130,21 @@ export default function AboutSection() {
                                         Backend Development
                                     </h4>
                                     <div className="space-y-4">
-                                        {skillsData.backend.map((skill) => (
-                                            <div key={skill.name} className="space-y-2">
+                                        {skillsData.backend.map((skill, index) => (
+                                            <motion.div
+                                                key={skill.name}
+                                                className="space-y-2"
+                                                initial={{ opacity: 0, x: -20 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: index * 0.1, duration: 0.5 }}
+                                                viewport={{ once: true }}
+                                            >
                                                 <div className="flex justify-between text-sm">
                                                     <span>{skill.name}</span>
                                                     <span className="text-muted-foreground">{skill.level}%</span>
                                                 </div>
                                                 <Progress value={skill.level} className="h-2" />
-                                            </div>
+                                            </motion.div>
                                         ))}
                                     </div>
                                 </CardContent>

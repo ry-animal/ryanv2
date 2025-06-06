@@ -4,6 +4,7 @@ import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 import Link from "next/link";
+import { smoothScrollToTop } from "@/utils/smooth-scroll";
 
 const navigation = {
     main: [
@@ -37,7 +38,7 @@ const navigation = {
 };
 
 const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    smoothScrollToTop();
 };
 
 export function Footer() {

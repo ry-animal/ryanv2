@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { hoverLift, motionSafe, staggerItem } from "@/lib/animations";
+import { hoverLift, motionSafe, staggerItem, projectCardHover, magneticHover } from "@/lib/animations";
 
 interface ProjectCardProps {
     project: {
@@ -32,10 +32,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
     return (
         <motion.div
             variants={motionSafe(staggerItem)}
-            {...hoverLift}
+            {...projectCardHover}
             className="h-full"
         >
-            <Card className="group h-full overflow-hidden transition-shadow duration-300 hover:shadow-lg">
+            <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl border-0 hover:border-primary/20">
                 {project.imageUrl && (
                     <div className="relative aspect-video overflow-hidden">
                         <OptimizedImage
@@ -90,38 +90,42 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     {/* Action buttons */}
                     <div className="flex gap-2">
                         {project.githubUrl && (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                asChild
-                                className="flex-1"
-                            >
-                                <a
-                                    href={project.githubUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                            <motion.div {...magneticHover} className="flex-1">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    asChild
+                                    className="w-full transition-colors hover:bg-primary hover:text-primary-foreground"
                                 >
-                                    <Github className="mr-2 h-4 w-4" />
-                                    Code
-                                </a>
-                            </Button>
+                                    <a
+                                        href={project.githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Github className="mr-2 h-4 w-4" />
+                                        Code
+                                    </a>
+                                </Button>
+                            </motion.div>
                         )}
                         {project.liveUrl && (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                asChild
-                                className="flex-1"
-                            >
-                                <a
-                                    href={project.liveUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                            <motion.div {...magneticHover} className="flex-1">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    asChild
+                                    className="w-full transition-colors hover:bg-primary hover:text-primary-foreground"
                                 >
-                                    <ExternalLink className="mr-2 h-4 w-4" />
-                                    Live
-                                </a>
-                            </Button>
+                                    <a
+                                        href={project.liveUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <ExternalLink className="mr-2 h-4 w-4" />
+                                        Live
+                                    </a>
+                                </Button>
+                            </motion.div>
                         )}
                     </div>
                 </CardContent>

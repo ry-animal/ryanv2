@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import Link from "next/link";
+import { smoothScrollTo } from "@/utils/smooth-scroll";
 
 const navItems = [
     { href: "#about", label: "About" },
@@ -20,6 +20,13 @@ export function MobileNav() {
 
     const handleNavClick = () => {
         setIsOpen(false);
+    };
+
+    const handleNavLinkClick = (href: string) => {
+        setIsOpen(false);
+        if (href.startsWith('#')) {
+            smoothScrollTo(href);
+        }
     };
 
     return (
@@ -76,13 +83,12 @@ export function MobileNav() {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: index * 0.1 }}
                                     >
-                                        <Link
-                                            href={item.href}
-                                            onClick={handleNavClick}
-                                            className="block text-lg font-medium hover:text-primary transition-colors py-2"
+                                        <button
+                                            onClick={() => handleNavLinkClick(item.href)}
+                                            className="block text-lg font-medium hover:text-primary transition-colors py-2 text-left w-full"
                                         >
                                             {item.label}
-                                        </Link>
+                                        </button>
                                     </motion.div>
                                 ))}
                             </nav>

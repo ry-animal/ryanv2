@@ -5,6 +5,7 @@ import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { ScrollReveal } from "@/components/interactive/scroll-reveal";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
+import { smoothScrollTo } from "@/utils/smooth-scroll";
 
 export default function HeroSection() {
     return (
@@ -88,11 +89,8 @@ export default function HeroSection() {
                                 <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="animate-bounce"
-                                    onClick={() => {
-                                        const nextSection = document.querySelector('#about');
-                                        nextSection?.scrollIntoView({ behavior: 'smooth' });
-                                    }}
+                                    className="animate-bounce hover:animate-none"
+                                    onClick={() => smoothScrollTo('#about')}
                                     aria-label="Scroll to about section"
                                 >
                                     <ArrowDown className="h-5 w-5" />

@@ -15,7 +15,7 @@ const mockProjects = [
         technologies: JSON.stringify(["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"]),
         githubUrl: "https://github.com/ry-animal/ryanv2",
         liveUrl: "https://web-1ea6shdgl-ryanimals-projects.vercel.app",
-        imageUrl: "/images/portfolio-preview.jpg",
+        imageUrl: "/images/portfolio-preview.svg",
         featured: true,
     },
     {
@@ -26,7 +26,7 @@ const mockProjects = [
         technologies: JSON.stringify(["React", "Node.js", "PostgreSQL", "Chart.js", "Stripe"]),
         githubUrl: "https://github.com/ry-animal/dashboard-analytics",
         liveUrl: "https://analytics-dashboard-demo.vercel.app",
-        imageUrl: "/images/ecommerce-preview.jpg",
+        imageUrl: "/images/ecommerce-preview.svg",
         featured: true,
     },
     {

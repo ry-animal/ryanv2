@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { ImageOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface OptimizedImageProps {
@@ -41,12 +42,14 @@ export function OptimizedImage({
         return (
             <div
                 className={cn(
-                    "flex items-center justify-center bg-muted text-muted-foreground",
+                    "flex flex-col items-center justify-center bg-muted text-muted-foreground border border-dashed border-muted-foreground/30",
+                    fill ? "absolute inset-0" : "",
                     className
                 )}
-                style={{ width, height }}
+                style={fill ? undefined : { width, height }}
             >
-                <span>Failed to load image</span>
+                <ImageOff className="h-8 w-8 mb-2 opacity-50" />
+                <span className="text-sm opacity-70">Image not available</span>
             </div>
         );
     }

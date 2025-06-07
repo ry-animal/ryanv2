@@ -36,25 +36,23 @@ export function ProjectCard({ project }: ProjectCardProps) {
             className="h-full"
         >
             <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl border-0 hover:border-primary/20">
-                {project.imageUrl && (
-                    <div className="relative aspect-video overflow-hidden">
-                        <OptimizedImage
-                            src={project.imageUrl}
-                            alt={project.title}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                        {project.featured && (
-                            <Badge
-                                variant="secondary"
-                                className="absolute right-2 top-2"
-                            >
-                                Featured
-                            </Badge>
-                        )}
-                    </div>
-                )}
+                <div className="relative aspect-video overflow-hidden">
+                    <OptimizedImage
+                        src={project.imageUrl || "/images/placeholder.svg"}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    {project.featured && (
+                        <Badge
+                            variant="secondary"
+                            className="absolute right-2 top-2"
+                        >
+                            Featured
+                        </Badge>
+                    )}
+                </div>
 
                 <CardHeader>
                     <CardTitle className="line-clamp-2">
@@ -71,7 +69,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 </CardHeader>
 
                 <CardContent className="space-y-4">
-                    {/* Technologies */}
                     {technologies.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                             {technologies.slice(0, 4).map((tech: string) => (
@@ -86,8 +83,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
                             )}
                         </div>
                     )}
-
-                    {/* Action buttons */}
                     <div className="flex gap-2">
                         {project.githubUrl && (
                             <motion.div {...magneticHover} className="flex-1">

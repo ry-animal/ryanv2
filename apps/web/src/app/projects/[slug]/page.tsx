@@ -25,7 +25,7 @@ The development process emphasized accessibility compliance, following WCAG 2.1 
             technologies: JSON.stringify(["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "tRPC", "Drizzle ORM", "PostgreSQL"]),
             githubUrl: "https://github.com/username/portfolio",
             liveUrl: "https://portfolio.example.com",
-            imageUrl: "/images/portfolio-preview.jpg",
+            imageUrl: "/images/portfolio-preview.svg",
             featured: true,
             createdAt: "2024-01-15",
             updatedAt: "2024-01-20",
@@ -50,7 +50,7 @@ Security was a primary concern, implementing proper authentication flows, paymen
             technologies: JSON.stringify(["React", "Node.js", "PostgreSQL", "Stripe", "Redis", "Docker", "AWS"]),
             githubUrl: "https://github.com/username/ecommerce",
             liveUrl: "https://shop.example.com",
-            imageUrl: "/images/ecommerce-preview.jpg",
+            imageUrl: "/images/ecommerce-preview.svg",
             featured: true,
             createdAt: "2023-08-10",
             updatedAt: "2023-12-15",
@@ -111,7 +111,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     return (
         <main className="py-20">
             <ResponsiveContainer>
-                {/* Back Button */}
                 <div className="mb-8">
                     <Button variant="ghost" asChild>
                         <Link href="/#projects">
@@ -121,7 +120,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </Button>
                 </div>
 
-                {/* Project Header */}
                 <div className="mb-12">
                     <div className="mb-6">
                         <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -139,7 +137,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         </p>
                     </div>
 
-                    {/* Project Meta */}
+
                     <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mb-8">
                         <div className="flex items-center gap-2">
                             <Calendar className="h-4 w-4" />
@@ -151,7 +149,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
+
                     <div className="flex flex-wrap gap-4">
                         {project.liveUrl && (
                             <Button size="lg" asChild>
@@ -172,7 +170,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </div>
                 </div>
 
-                {/* Hero Image */}
                 {project.imageUrl && (
                     <div className="relative aspect-video mb-12 overflow-hidden rounded-lg">
                         <OptimizedImage
@@ -187,7 +184,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 )}
 
                 <div className="grid lg:grid-cols-3 gap-12">
-                    {/* Main Content */}
+
                     <div className="lg:col-span-2 space-y-8">
                         <Card>
                             <CardHeader>
@@ -202,7 +199,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             </CardContent>
                         </Card>
 
-                        {/* Gallery */}
+
                         {project.gallery && project.gallery.length > 0 && (
                             <Card>
                                 <CardHeader>
@@ -227,9 +224,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         )}
                     </div>
 
-                    {/* Sidebar */}
+
                     <div className="space-y-6">
-                        {/* Technologies */}
+
                         <Card>
                             <CardHeader>
                                 <CardTitle>Technologies Used</CardTitle>
@@ -245,7 +242,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             </CardContent>
                         </Card>
 
-                        {/* Project Links */}
+
                         <Card>
                             <CardHeader>
                                 <CardTitle>Project Links</CardTitle>

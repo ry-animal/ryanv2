@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Download } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Send, Download } from "lucide-react";
 import { toast } from "sonner";
 
 // Form data type
@@ -53,10 +53,10 @@ const contactInfo = [
         href: "mailto:ryanlvv@gmail.com",
     },
     {
-        icon: Phone,
-        label: "Phone",
-        value: "+1 (206) 650-3536",
-        href: "tel:+12066503536",
+        icon: MessageCircle,
+        label: "Telegram",
+        value: "@ryan_v2",
+        href: "https://t.me/ryan_v2",
     },
     {
         icon: MapPin,
@@ -142,7 +142,6 @@ export default function ContactSection() {
     return (
         <section id="contact" className="py-20 lg:py-32 bg-muted/30">
             <ResponsiveContainer>
-                {/* Section Header */}
                 <div className="text-center mb-16">
                     <ScrollReveal>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
@@ -155,45 +154,46 @@ export default function ContactSection() {
                     </ScrollReveal>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-12">
-                    {/* Contact Information */}
+                <div className="grid lg:grid-cols-2 gap-12 items-start">
                     <div className="space-y-8">
                         <ScrollReveal>
-                            <div className="space-y-6">
-                                <h3 className="text-2xl font-bold">Let's Connect</h3>
-                                <p className="text-muted-foreground leading-relaxed">
-                                    I'm always open to discussing new opportunities, interesting projects,
-                                    or just having a friendly chat about technology and development.
-                                </p>
-                            </div>
-                        </ScrollReveal>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="text-2xl">Let's Connect</CardTitle>
+                                    <CardDescription className="text-base">
+                                        I'm always open to discussing new opportunities, interesting projects,
+                                        or just having a friendly chat about technology and development.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
 
-                        <div className="space-y-4">
-                            {contactInfo.map((info, index) => (
-                                <ScrollReveal key={info.label} delay={index * 0.1}>
-                                    <div className="flex items-center gap-4 p-4 rounded-lg bg-background/50 border">
-                                        <div className="flex-shrink-0">
-                                            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                                                <info.icon className="h-5 w-5 text-primary" />
+                                    {contactInfo.map((info, index) => (
+                                        <ScrollReveal key={info.label} delay={index * 0.1}>
+                                            <div className="flex items-center gap-4 p-4 rounded-lg bg-background/50 border">
+                                                <div className="flex-shrink-0">
+                                                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                                                        <info.icon className="h-5 w-5 text-primary" />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="font-medium">{info.label}</div>
+                                                    {info.href ? (
+                                                        <a
+                                                            href={info.href}
+                                                            className="text-muted-foreground hover:text-primary transition-colors"
+                                                        >
+                                                            {info.value}
+                                                        </a>
+                                                    ) : (
+                                                        <div className="text-muted-foreground">{info.value}</div>
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <div className="font-medium">{info.label}</div>
-                                            {info.href ? (
-                                                <a
-                                                    href={info.href}
-                                                    className="text-muted-foreground hover:text-primary transition-colors"
-                                                >
-                                                    {info.value}
-                                                </a>
-                                            ) : (
-                                                <div className="text-muted-foreground">{info.value}</div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </ScrollReveal>
-                            ))}
-                        </div>
+                                        </ScrollReveal>
+                                    ))}
+                                </CardContent>
+                            </Card>
+                        </ScrollReveal>
 
                         <ScrollReveal delay={0.4}>
                             <Button
@@ -219,7 +219,7 @@ export default function ContactSection() {
                             <CardHeader>
                                 <CardTitle>Send a Message</CardTitle>
                                 <CardDescription>
-                                    Fill out the form below and I'll get back to you as soon as possible.
+                                    Note: Email form is currently in development. For immediate contact, please use email or Telegram above.
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
@@ -292,7 +292,6 @@ export default function ContactSection() {
                                         )}
                                     </div>
 
-                                    {/* Submit Button */}
                                     <Button
                                         type="submit"
                                         disabled={isSubmitting}

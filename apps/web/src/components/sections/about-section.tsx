@@ -9,31 +9,41 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
 const skillsData = {
-    frontend: [
-        { name: "React/Next.js", level: 95 },
-        { name: "TypeScript", level: 92 },
-        { name: "Tailwind CSS", level: 90 },
-        { name: "JavaScript ES6+", level: 95 },
+    languages: [
+        { name: "TypeScript/JavaScript", level: 95 },
+        { name: "Go", level: 85 },
+        { name: "Java/Kotlin", level: 80 },
+        { name: "Solidity", level: 75 },
     ],
-    backend: [
-        { name: "Node.js", level: 88 },
-        { name: "PostgreSQL", level: 85 },
-        { name: "tRPC", level: 80 },
-        { name: "Prisma/Drizzle", level: 82 },
+    frameworks: [
+        { name: "React", level: 95 },
+        { name: "Next.js", level: 95 },
+        { name: "Express/Fastify", level: 90 },
+        { name: "Gin", level: 85 },
+        { name: "Spring", level: 80 },
+        { name: "Foundry/Hardhat", level: 75 },
     ],
-    tools: [
-        { name: "Git", level: 95 },
-        { name: "Docker", level: 78 },
-        { name: "AWS", level: 75 },
-        { name: "Vercel", level: 90 },
+    platforms: [
+        { name: "AWS", level: 90 },
+        { name: "Azure", level: 85 },
+        { name: "PCF", level: 75 },
+        { name: "EVM", level: 80 },
+    ],
+    aiTooling: [
+        "Prompt Engineering",
+        "Langchain",
+        "HuggingFace",
+        "Cursor",
+        "Windsurf",
+        "deAI"
     ],
 };
 
 const stats = [
-    { label: "Years of Experience", value: "8+" },
-    { label: "Projects Delivered", value: "40+" },
-    { label: "Technologies", value: "15+" },
-    { label: "Team Projects", value: "25+" },
+    { label: "Years of Experience", value: "10+" },
+    { label: "Companies", value: "7" },
+    { label: "Technologies", value: "20+" },
+    { label: "Team Leadership", value: "12+" },
 ];
 
 export default function AboutSection() {
@@ -49,20 +59,20 @@ export default function AboutSection() {
                                 </h2>
                                 <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                                     <p>
-                                        I'm a senior full-stack developer with 8+ years of experience building
-                                        high-performance web applications that scale. I've led development teams,
-                                        architected complex systems, and delivered products used by thousands of users.
+                                        I'm a senior software engineer with 10+ years of experience building
+                                        high-performance applications at industry leaders like Microsoft, GameStop, and Boeing,
+                                        plus innovative startups in the DeFi and web3 space. I've led development teams of 12+,
+                                        architected complex systems, and delivered products serving millions of users.
                                     </p>
                                     <p>
-                                        My expertise spans the entire web development stack, with deep knowledge in
-                                        React, Next.js, TypeScript, and Node.js. I'm passionate about performance
-                                        optimization, user experience design, and building maintainable code that
-                                        teams can collaborate on effectively.
+                                        My expertise spans full-stack development, blockchain technologies, and cloud infrastructure.
+                                        From developing Minecraft.net at Microsoft to building DeFi protocols with $110M+ TVL,
+                                        I specialize in React, Next.js, TypeScript, and emerging web3 technologies like wagmi, viem, and smart contracts.
                                     </p>
                                     <p>
-                                        I believe in continuous learning and staying current with emerging technologies.
-                                        When I'm not coding, I enjoy mentoring junior developers and contributing to
-                                        the open-source community.
+                                        I thrive in fast-paced environments, leading technical migrations, implementing modern architectures,
+                                        and mentoring teams. My experience ranges from enterprise applications to cutting-edge blockchain solutions,
+                                        always focusing on scalability, performance, and exceptional user experiences.
                                     </p>
                                 </div>
                             </div>
@@ -92,10 +102,10 @@ export default function AboutSection() {
                                 <CardContent className="p-6">
                                     <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
                                         <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                                        Frontend Development
+                                        Languages
                                     </h4>
                                     <div className="space-y-4">
-                                        {skillsData.frontend.map((skill, index) => (
+                                        {skillsData.languages.map((skill, index) => (
                                             <motion.div
                                                 key={skill.name}
                                                 className="space-y-2"
@@ -121,10 +131,10 @@ export default function AboutSection() {
                                 <CardContent className="p-6">
                                     <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
                                         <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                                        Backend Development
+                                        Frameworks/Libraries
                                     </h4>
                                     <div className="space-y-4">
-                                        {skillsData.backend.map((skill, index) => (
+                                        {skillsData.frameworks.map((skill, index) => (
                                             <motion.div
                                                 key={skill.name}
                                                 className="space-y-2"
@@ -150,12 +160,41 @@ export default function AboutSection() {
                                 <CardContent className="p-6">
                                     <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
                                         <span className="w-3 h-3 bg-purple-500 rounded-full"></span>
-                                        Tools & Technologies
+                                        Platforms
+                                    </h4>
+                                    <div className="space-y-4">
+                                        {skillsData.platforms.map((skill, index) => (
+                                            <motion.div
+                                                key={skill.name}
+                                                className="space-y-2"
+                                                initial={{ opacity: 0, x: -20 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: index * 0.1, duration: 0.5 }}
+                                                viewport={{ once: true }}
+                                            >
+                                                <div className="flex justify-between text-sm">
+                                                    <span>{skill.name}</span>
+                                                    <span className="text-muted-foreground">{skill.level}%</span>
+                                                </div>
+                                                <Progress value={skill.level} className="h-2" />
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={0.5}>
+                            <Card>
+                                <CardContent className="p-6">
+                                    <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                                        <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
+                                        AI Tooling
                                     </h4>
                                     <div className="flex flex-wrap gap-2">
-                                        {skillsData.tools.map((skill) => (
-                                            <Badge key={skill.name} variant="secondary">
-                                                {skill.name}
+                                        {skillsData.aiTooling.map((tool) => (
+                                            <Badge key={tool} variant="secondary">
+                                                {tool}
                                             </Badge>
                                         ))}
                                     </div>

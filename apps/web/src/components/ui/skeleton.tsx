@@ -31,24 +31,19 @@ export function ProjectCardSkeleton() {
 	return (
 		<div className="h-full">
 			<div className="group h-full overflow-hidden rounded-lg border bg-card">
-				{/* Image skeleton */}
 				<div className="relative aspect-video overflow-hidden">
 					<Skeleton className="w-full h-full" />
 				</div>
 
-				{/* Content skeleton */}
 				<div className="p-6 space-y-4">
-					{/* Title */}
 					<Skeleton className="h-6 w-3/4" />
 
-					{/* Description */}
 					<div className="space-y-2">
 						<Skeleton className="h-4 w-full" />
 						<Skeleton className="h-4 w-5/6" />
 						<Skeleton className="h-4 w-4/6" />
 					</div>
 
-					{/* Technologies */}
 					<div className="flex flex-wrap gap-2">
 						<Skeleton className="h-6 w-16" />
 						<Skeleton className="h-6 w-20" />
@@ -56,7 +51,6 @@ export function ProjectCardSkeleton() {
 						<Skeleton className="h-6 w-18" />
 					</div>
 
-					{/* Buttons */}
 					<div className="flex gap-2">
 						<Skeleton className="h-9 w-20" />
 						<Skeleton className="h-9 w-16" />
@@ -71,13 +65,10 @@ export function ProjectCardSkeleton() {
 export function ExperienceCardSkeleton() {
 	return (
 		<div className="relative flex items-center">
-			{/* Timeline dot */}
 			<div className="absolute left-4 md:left-1/2 w-3 h-3 bg-muted rounded-full md:transform md:-translate-x-1/2 z-10" />
 
-			{/* Content */}
 			<div className="w-full md:w-1/2 md:pr-8 pl-12 md:pl-0">
 				<div className="rounded-lg border bg-card p-6">
-					{/* Header */}
 					<div className="mb-4">
 						<Skeleton className="h-6 w-3/4 mb-2" />
 						<Skeleton className="h-5 w-1/2 mb-3" />
@@ -87,14 +78,12 @@ export function ExperienceCardSkeleton() {
 						</div>
 					</div>
 
-					{/* Description */}
 					<div className="space-y-2 mb-4">
 						<Skeleton className="h-4 w-full" />
 						<Skeleton className="h-4 w-5/6" />
 						<Skeleton className="h-4 w-4/6" />
 					</div>
 
-					{/* Technologies */}
 					<div className="flex flex-wrap gap-2">
 						<Skeleton className="h-6 w-16" />
 						<Skeleton className="h-6 w-20" />

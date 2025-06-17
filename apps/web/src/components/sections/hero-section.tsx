@@ -55,7 +55,7 @@ export default function HeroSection() {
     }, [currentText, currentPhraseIndex, isDeleting, phrases]);
 
     return (
-        <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-18">
             {/* Retro grid background */}
             <div className="absolute inset-0 retro-grid opacity-20" />
 
@@ -81,7 +81,7 @@ export default function HeroSection() {
                 />
             ))}
 
-            <ResponsiveContainer className="text-center relative z-10">
+            <ResponsiveContainer className="text-center relative z-40">
                 <motion.div
                     className="space-y-8 md:space-y-12"
                     variants={staggerContainer}
@@ -106,7 +106,7 @@ export default function HeroSection() {
                                         animation: "gradient 4s ease infinite, retro-glow 3s ease-in-out infinite alternate"
                                     }}
                                 >
-                                    <span className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary opacity-20 blur-xl -z-10" />
+                                    <span className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary opacity-20 blur-xl z-[-1]" />
                                     {currentText}
                                 </span>
                             </motion.h1>
@@ -228,7 +228,7 @@ export default function HeroSection() {
                     {/* Scroll indicator with improved animation */}
                     <motion.div
                         variants={staggerItem}
-                        className="pt-8 md:pt-16"
+                        className="pb-4 md:pb-8"
                     >
                         <motion.div
                             className="relative"

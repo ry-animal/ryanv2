@@ -4,7 +4,7 @@
 
 Successfully transformed Better-T-Stack monorepo boilerplate into a professional portfolio website for **Ryan Van Valkenberg**. Currently deployed and publicly accessible.
 
-**Live Portfolio:** https://web-1ea6shdgl-ryanimals-projects.vercel.app
+**Live Portfolio:** https://rv2.run
 
 ## ✅ Completed Phases
 

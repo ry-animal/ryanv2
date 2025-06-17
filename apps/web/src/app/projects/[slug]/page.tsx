@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     }
 
     const technologies = JSON.parse(project.technologies);
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rv2.dev";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rv2.run";
 
     // Generate dynamic OG image with project info
     const ogParams = new URLSearchParams({

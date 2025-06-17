@@ -25,7 +25,7 @@ export function generateMetadata({
 }: MetaTagsProps): Metadata {
     const siteName = "Ryan Van Valkenburg - Full-Stack Developer";
     const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rv2.dev";
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rv2.run";
 
     // Generate dynamic OG image if not provided
     let imageUrl: string;

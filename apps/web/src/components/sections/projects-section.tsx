@@ -14,7 +14,7 @@ const mockProjects = [
         description: "A performant portfolio built with Next.js 15, featuring Server Components, Framer Motion animations, and 95+ Lighthouse scores.",
         technologies: JSON.stringify(["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"]),
         githubUrl: "https://github.com/ry-animal/ryanv2",
-        liveUrl: "https://web-1ea6shdgl-ryanimals-projects.vercel.app",
+        liveUrl: "https://rv2.run",
         imageUrl: "/images/portfolio-preview.svg",
         featured: true,
     },

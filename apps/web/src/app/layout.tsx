@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "../index.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -10,14 +10,18 @@ import { Toaster } from "sonner";
 import Providers from "@/components/providers";
 import { generateMetadata, generatePersonStructuredData, generateWebsiteStructuredData } from "@/components/seo/meta-tags";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const ibmPlexMono = IBM_Plex_Mono({
+	variable: "--font-ibm-plex-mono",
 	subsets: ["latin"],
+	weight: ["300", "400", "500", "600", "700"],
+	display: "swap",
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+const spaceGrotesk = Space_Grotesk({
+	variable: "--font-space-grotesk",
 	subsets: ["latin"],
+	weight: ["300", "400", "500", "600", "700"],
+	display: "swap",
 });
 
 export const metadata: Metadata = generateMetadata({
@@ -57,7 +61,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${ibmPlexMono.variable} ${spaceGrotesk.variable} antialiased font-mono`}
 			>
 				<Providers>
 					<WebVitals />

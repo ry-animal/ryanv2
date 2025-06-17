@@ -8,7 +8,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { MobileNav } from "@/components/interactive/mobile-nav";
 import { ResponsiveContainer } from "@/components/layout/responsive-container";
 import { smoothScrollTo } from "@/utils/smooth-scroll";
-import { Download } from "lucide-react";
+import { Download, Terminal } from "lucide-react";
+import { glitchEffect } from "@/lib/animations";
 
 const navItems = [
     { href: "#about", label: "About" },
@@ -54,70 +55,145 @@ export function Header() {
 
     return (
         <motion.header
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.5 }}
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-                ? "bg-background/95 backdrop-blur-md border-b shadow-sm"
-                : "bg-background/70 backdrop-blur-sm"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
+                ? "bg-background/95 backdrop-blur-md border-b border-primary/30 shadow-lg"
+                : "bg-background/80 backdrop-blur-sm border-b border-primary/10"
                 }`}
         >
             <ResponsiveContainer>
                 <div className="flex items-center justify-between h-16">
+                    {/* Logo with retro terminal styling */}
                     <Link href="/" className="flex items-center space-x-2">
                         <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            className="font-bold text-xl bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent"
+                            className="flex items-center gap-2 font-mono text-lg font-bold"
+                            variants={glitchEffect}
+                            whileHover="animate"
                         >
-                            Home
+                            <Terminal className="w-5 h-5 text-primary" />
+                            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                                [HOME]
+                            </span>
                         </motion.div>
                     </Link>
 
+                    {/* Navigation with improved hover effects */}
                     <nav className="hidden md:flex items-center space-x-8">
-                        {navItems.map((item) => (
-                            <button
+                        {navItems.map((item, index) => (
+                            <motion.button
                                 key={item.href}
                                 onClick={() => handleNavClick(item.href)}
-                                className={`text-sm font-medium transition-colors relative group cursor-pointer ${activeSection === item.href
+                                className={`text-sm font-mono font-medium transition-all duration-300 relative group cursor-pointer px-3 py-2 rounded ${activeSection === item.href
                                     ? "text-primary"
-                                    : "hover:text-primary"
+                                    : "text-muted-foreground hover:text-primary"
                                     }`}
+                                whileHover={{
+                                    scale: 1.05,
+                                    transition: { duration: 0.2 }
+                                }}
+                                whileTap={{
+                                    scale: 0.95,
+                                    transition: { duration: 0.1 }
+                                }}
                             >
-                                {item.label}
-                                <motion.span
-                                    className="absolute -bottom-1 left-0 h-0.5 bg-primary"
-                                    initial={{ width: 0 }}
+                                <span>{"> "}{item.label}</span>
+
+                                {/* Retro underline animation */}
+                                <motion.div
+                                    className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-primary to-accent rounded-full"
+                                    initial={{ width: 0, opacity: 0 }}
                                     animate={{
-                                        width: activeSection === item.href ? "100%" : 0
+                                        width: activeSection === item.href ? "100%" : 0,
+                                        opacity: activeSection === item.href ? 1 : 0,
                                     }}
-                                    whileHover={{ width: "100%" }}
-                                    transition={{ duration: 0.2 }}
+                                    whileHover={{
+                                        width: "100%",
+                                        opacity: 1,
+                                    }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
                                 />
-                            </button>
+
+                                {/* Scanning line effect on hover */}
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded"
+                                    initial={{ x: "-100%", opacity: 0 }}
+                                    whileHover={{
+                                        x: "100%",
+                                        opacity: 1,
+                                        transition: { duration: 0.6, ease: "easeInOut" }
+                                    }}
+                                />
+
+                                {/* Background glow on hover */}
+                                <motion.div
+                                    className="absolute inset-0 bg-primary/5 rounded -z-10"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    whileHover={{
+                                        opacity: 1,
+                                        scale: 1,
+                                        transition: { duration: 0.3 }
+                                    }}
+                                />
+                            </motion.button>
                         ))}
                     </nav>
 
+                    {/* Action buttons with improved retro styling */}
                     <div className="flex items-center space-x-4">
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            asChild
-                            className="hidden sm:flex"
+                        <motion.div
+                            whileHover={{
+                                scale: 1.05,
+                                transition: { duration: 0.2 }
+                            }}
+                            whileTap={{
+                                scale: 0.95,
+                                transition: { duration: 0.1 }
+                            }}
                         >
-                            <a
-                                href="/resume.pdf"
-                                download="Ryan_Van_Valkenburg_Resume.pdf"
-                                className="flex items-center gap-2"
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                asChild
+                                className="hidden sm:flex retro-glow border-accent text-accent hover:bg-accent hover:text-accent-foreground font-mono transition-all duration-300"
                             >
-                                <Download className="h-4 w-4" />
-                                Resume
-                            </a>
-                        </Button>
-                        <ModeToggle />
+                                <a
+                                    href="/resume.pdf"
+                                    download="Ryan_Van_Valkenburg_Resume.pdf"
+                                    className="flex items-center gap-2"
+                                >
+                                    <Download className="h-4 w-4" />
+                                    {"> RESUME"}
+                                </a>
+                            </Button>
+                        </motion.div>
+
+                        {/* Mode toggle with retro styling */}
+                        <div className="relative">
+                            <ModeToggle />
+                        </div>
+
+                        {/* Mobile nav */}
                         <MobileNav />
                     </div>
                 </div>
             </ResponsiveContainer>
+
+            {/* Subtle scanning line across header */}
+            <motion.div
+                className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent"
+                animate={{
+                    x: ["-100%", "100%"],
+                    opacity: [0, 1, 0],
+                }}
+                transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "linear",
+                }}
+                style={{ width: "30%" }}
+            />
         </motion.header>
     );
 } 

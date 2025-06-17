@@ -4,88 +4,109 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--font-sans: "Inter", "Geist", ui-sans-serif, system-ui, sans-serif,
+	--font-sans: var(--font-space-grotesk), "Inter", ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-mono: var(--font-ibm-plex-mono), "IBM Plex Mono", "Courier New", monospace;
+	
+	/* Retro Background Colors */
+	--color-retro-dark: oklch(0.08 0 0);           /* Deep charcoal background */
+	--color-retro-darker: oklch(0.05 0 0);         /* Even darker for cards */
+	--color-retro-light: oklch(0.95 0 0);          /* Light text */
+	--color-retro-muted: oklch(0.65 0 0);          /* Muted text */
+	
+	/* Neon Accent Colors */
+	--color-retro-teal: oklch(0.65 0.15 180);      /* Desaturated teal */
+	--color-retro-orange: oklch(0.7 0.18 45);      /* Burnt orange */
+	--color-retro-indigo: oklch(0.45 0.12 270);    /* Deep indigo */
+	--color-retro-magenta: oklch(0.6 0.2 320);     /* Soft magenta */
+	--color-retro-cyan: oklch(0.7 0.14 195);       /* Cyan glow */
+	--color-retro-amber: oklch(0.75 0.16 65);      /* Amber accent */
 }
 
 html,
 body {
-	@apply bg-white dark:bg-gray-950;
-	/* Prevent layout shift from scrollbar */
 	scrollbar-gutter: stable;
-
+	font-feature-settings: "kern" 1, "liga" 1;
+	
 	@media (prefers-color-scheme: dark) {
 		color-scheme: dark;
 	}
 }
 
+/* Light Theme - Retro but brighter */
 :root {
 	--radius: 0.625rem;
-	--background: oklch(1 0 0);
-	--foreground: oklch(0.145 0 0);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.145 0 0);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
-	--primary-foreground: oklch(0.985 0 0);
-	--secondary: oklch(0.97 0 0);
-	--secondary-foreground: oklch(0.205 0 0);
-	--muted: oklch(0.97 0 0);
-	--muted-foreground: oklch(0.556 0 0);
-	--accent: oklch(0.97 0 0);
-	--accent-foreground: oklch(0.205 0 0);
-	--destructive: oklch(0.577 0.245 27.325);
-	--border: oklch(0.922 0 0);
-	--input: oklch(0.922 0 0);
-	--ring: oklch(0.708 0 0);
-	--chart-1: oklch(0.646 0.222 41.116);
-	--chart-2: oklch(0.6 0.118 184.704);
-	--chart-3: oklch(0.398 0.07 227.392);
-	--chart-4: oklch(0.828 0.189 84.429);
-	--chart-5: oklch(0.769 0.188 70.08);
-	--sidebar: oklch(0.985 0 0);
-	--sidebar-foreground: oklch(0.145 0 0);
-	--sidebar-primary: oklch(0.205 0 0);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.97 0 0);
-	--sidebar-accent-foreground: oklch(0.205 0 0);
-	--sidebar-border: oklch(0.922 0 0);
-	--sidebar-ring: oklch(0.708 0 0);
+	
+	/* Light retro theme */
+	--retro-dark: oklch(0.95 0 0);           /* Light background */
+	--retro-darker: oklch(0.98 0 0);         /* Even lighter for cards */
+	--retro-light: oklch(0.08 0 0);          /* Dark text */
+	--retro-muted: oklch(0.45 0 0);          /* Muted dark text */
+	
+	/* Neon Accent Colors (adjusted for light theme) */
+	--retro-teal: oklch(0.45 0.18 180);      /* Darker teal */
+	--retro-orange: oklch(0.5 0.22 45);      /* Darker orange */
+	--retro-indigo: oklch(0.35 0.15 270);    /* Darker indigo */
+	--retro-magenta: oklch(0.4 0.25 320);    /* Darker magenta */
+	--retro-cyan: oklch(0.5 0.18 195);       /* Darker cyan */
+	--retro-amber: oklch(0.55 0.2 65);       /* Darker amber */
+	
+	/* UI Color Mappings */
+	--background: var(--retro-dark);
+	--foreground: var(--retro-light);
+	--card: var(--retro-darker);
+	--card-foreground: var(--retro-light);
+	--popover: var(--retro-darker);
+	--popover-foreground: var(--retro-light);
+	--primary: var(--retro-teal);
+	--primary-foreground: var(--retro-dark);
+	--secondary: oklch(0.92 0 0);
+	--secondary-foreground: var(--retro-light);
+	--muted: oklch(0.88 0 0);
+	--muted-foreground: var(--retro-muted);
+	--accent: var(--retro-orange);
+	--accent-foreground: var(--retro-dark);
+	--destructive: oklch(0.55 0.25 20);
+	--border: oklch(0.85 0 0);
+	--input: oklch(0.88 0 0);
+	--ring: var(--retro-teal);
 }
 
+/* Dark Theme - Original retro aesthetic */
 .dark {
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.205 0 0);
-	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.205 0 0);
-	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.922 0 0);
-	--primary-foreground: oklch(0.205 0 0);
-	--secondary: oklch(0.269 0 0);
-	--secondary-foreground: oklch(0.985 0 0);
-	--muted: oklch(0.269 0 0);
-	--muted-foreground: oklch(0.708 0 0);
-	--accent: oklch(0.269 0 0);
-	--accent-foreground: oklch(0.985 0 0);
-	--destructive: oklch(0.704 0.191 22.216);
-	--border: oklch(1 0 0 / 10%);
-	--input: oklch(1 0 0 / 15%);
-	--ring: oklch(0.556 0 0);
-	--chart-1: oklch(0.488 0.243 264.376);
-	--chart-2: oklch(0.696 0.17 162.48);
-	--chart-3: oklch(0.769 0.188 70.08);
-	--chart-4: oklch(0.627 0.265 303.9);
-	--chart-5: oklch(0.645 0.246 16.439);
-	--sidebar: oklch(0.205 0 0);
-	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.488 0.243 264.376);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.269 0 0);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
-	--sidebar-border: oklch(1 0 0 / 10%);
-	--sidebar-ring: oklch(0.556 0 0);
+	/* Dark retro theme */
+	--retro-dark: oklch(0.08 0 0);           /* Deep charcoal background */
+	--retro-darker: oklch(0.05 0 0);         /* Even darker for cards */
+	--retro-light: oklch(0.95 0 0);          /* Light text */
+	--retro-muted: oklch(0.65 0 0);          /* Muted text */
+	
+	/* Neon Accent Colors */
+	--retro-teal: oklch(0.65 0.15 180);      /* Desaturated teal */
+	--retro-orange: oklch(0.7 0.18 45);      /* Burnt orange */
+	--retro-indigo: oklch(0.45 0.12 270);    /* Deep indigo */
+	--retro-magenta: oklch(0.6 0.2 320);     /* Soft magenta */
+	--retro-cyan: oklch(0.7 0.14 195);       /* Cyan glow */
+	--retro-amber: oklch(0.75 0.16 65);      /* Amber accent */
+	
+	/* UI Color Mappings */
+	--background: var(--retro-dark);
+	--foreground: var(--retro-light);
+	--card: var(--retro-darker);
+	--card-foreground: var(--retro-light);
+	--popover: var(--retro-darker);
+	--popover-foreground: var(--retro-light);
+	--primary: var(--retro-teal);
+	--primary-foreground: var(--retro-dark);
+	--secondary: var(--retro-darker);
+	--secondary-foreground: var(--retro-light);
+	--muted: oklch(0.15 0 0);
+	--muted-foreground: var(--retro-muted);
+	--accent: var(--retro-orange);
+	--accent-foreground: var(--retro-dark);
+	--destructive: oklch(0.65 0.25 20);
+	--border: oklch(0.2 0 0);
+	--input: oklch(0.15 0 0);
+	--ring: var(--retro-teal);
 }
 
 @theme inline {
@@ -93,6 +114,8 @@ body {
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
+	
+	/* Color mappings */
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -111,19 +134,6 @@ body {
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
-	--color-chart-1: var(--chart-1);
-	--color-chart-2: var(--chart-2);
-	--color-chart-3: var(--chart-3);
-	--color-chart-4: var(--chart-4);
-	--color-chart-5: var(--chart-5);
-	--color-sidebar: var(--sidebar);
-	--color-sidebar-foreground: var(--sidebar-foreground);
-	--color-sidebar-primary: var(--sidebar-primary);
-	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-	--color-sidebar-accent: var(--sidebar-accent);
-	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-	--color-sidebar-border: var(--sidebar-border);
-	--color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
@@ -131,21 +141,214 @@ body {
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground font-mono;
+		position: relative;
+		transition: background-color 0.3s ease, color 0.3s ease;
+	}
+	
+	/* Subtle CRT scanline overlay - only in dark mode */
+	.dark body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			transparent 0%,
+			rgba(0, 255, 200, 0.02) 50%,
+			transparent 51%,
+			transparent 100%
+		);
+		background-size: 100% 4px;
+		pointer-events: none;
+		z-index: 1000;
+		opacity: 0.3;
+	}
+	
+	/* Light mode subtle overlay */
+	body::after {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			transparent 0%,
+			rgba(100, 100, 100, 0.01) 50%,
+			transparent 51%,
+			transparent 100%
+		);
+		background-size: 100% 8px;
+		pointer-events: none;
+		z-index: 1000;
+		opacity: 0.2;
+	}
+	
+	.dark body::after {
+		display: none;
+	}
+	
+	/* Text glow effects for headings - stronger in dark mode */
+	h1, h2, h3, h4, h5, h6 {
+		text-shadow: 0 0 8px currentColor;
+		transition: text-shadow 0.3s ease;
+	}
+	
+	.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+		text-shadow: 0 0 12px currentColor;
 	}
 }
 
-/* Hero name animations */
-@keyframes gradient {
+/* Enhanced retro animations */
+@keyframes retro-glow {
 	0% {
-		background-position: 0% 50%;
+		text-shadow: 
+			0 0 5px var(--retro-teal),
+			0 0 10px var(--retro-teal),
+			0 0 15px var(--retro-teal),
+			0 0 20px var(--retro-teal);
 	}
 	50% {
-		background-position: 100% 50%;
+		text-shadow: 
+			0 0 2px var(--retro-teal),
+			0 0 5px var(--retro-teal),
+			0 0 8px var(--retro-teal),
+			0 0 12px var(--retro-teal);
 	}
 	100% {
-		background-position: 0% 50%;
+		text-shadow: 
+			0 0 5px var(--retro-teal),
+			0 0 10px var(--retro-teal),
+			0 0 15px var(--retro-teal),
+			0 0 20px var(--retro-teal);
 	}
+}
+
+@keyframes retro-flicker {
+	0%, 98% { opacity: 1; }
+	99% { opacity: 0.98; }
+	100% { opacity: 1; }
+}
+
+@keyframes data-stream {
+	0% { transform: translateY(100vh); opacity: 0; }
+	10% { opacity: 1; }
+	90% { opacity: 1; }
+	100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+@keyframes hologram {
+	0% { 
+		background-position: 0% 0%;
+		filter: hue-rotate(0deg);
+	}
+	50% { 
+		background-position: 100% 100%;
+		filter: hue-rotate(90deg);
+	}
+	100% { 
+		background-position: 0% 0%;
+		filter: hue-rotate(0deg);
+	}
+}
+
+/* Improved retro button glow effect */
+.retro-glow {
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+}
+
+.retro-glow::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.2),
+		transparent
+	);
+	transition: left 0.6s ease;
+	z-index: 1;
+}
+
+.dark .retro-glow::before {
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(0, 255, 200, 0.4),
+		transparent
+	);
+}
+
+.retro-glow:hover::before {
+	left: 100%;
+}
+
+/* Terminal cursor blink */
+@keyframes terminal-blink {
+	0%, 50% { opacity: 1; }
+	51%, 100% { opacity: 0; }
+}
+
+.terminal-cursor::after {
+	content: '█';
+	color: var(--retro-teal);
+	animation: terminal-blink 1s infinite;
+	margin-left: 2px;
+}
+
+/* Parallax and depth effects */
+.parallax-layer {
+	transform-style: preserve-3d;
+}
+
+.depth-1 { transform: translateZ(10px); }
+.depth-2 { transform: translateZ(20px); }
+.depth-3 { transform: translateZ(30px); }
+
+/* Retro grid background - adjusted for theme */
+.retro-grid {
+	background-image: 
+		linear-gradient(rgba(100, 100, 100, 0.1) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+	background-size: 50px 50px;
+	animation: retro-flicker 4s infinite;
+	transition: background-image 0.3s ease;
+}
+
+.dark .retro-grid {
+	background-image: 
+		linear-gradient(rgba(0, 255, 200, 0.1) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(0, 255, 200, 0.1) 1px, transparent 1px);
+}
+
+/* CRT monitor curve effect */
+.crt-monitor {
+	border-radius: 25px;
+	box-shadow: 
+		inset 0 0 50px rgba(0, 0, 0, 0.3),
+		0 0 100px rgba(100, 100, 100, 0.1);
+	transition: box-shadow 0.3s ease;
+}
+
+.dark .crt-monitor {
+	box-shadow: 
+		inset 0 0 50px rgba(0, 0, 0, 0.8),
+		0 0 100px rgba(0, 255, 200, 0.1);
+}
+
+/* Legacy hero animations (keep for compatibility) */
+@keyframes gradient {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
 }
 
 @keyframes glow {

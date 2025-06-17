@@ -82,15 +82,27 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
         };
     }
 
+    const technologies = JSON.parse(project.technologies);
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rv2.dev";
+
+    // Generate dynamic OG image with project info
+    const ogParams = new URLSearchParams({
+        title: project.title,
+        subtitle: project.description.slice(0, 100) + (project.description.length > 100 ? '...' : ''),
+        type: "project",
+        tech: technologies.slice(0, 4).join(','),
+    });
+    const dynamicOgImage = `${baseUrl}/api/og?${ogParams.toString()}`;
+
     return generateSEOMetadata({
         title: project.title,
         description: project.description,
         type: "article",
         publishedTime: project.createdAt,
         modifiedTime: project.updatedAt,
-        ogImage: project.imageUrl || undefined,
+        ogImage: dynamicOgImage,
         keywords: [
-            ...JSON.parse(project.technologies),
+            ...technologies,
             project.category,
             "Portfolio Project",
             "Web Development",

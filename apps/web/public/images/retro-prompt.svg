@@ -1,0 +1,103 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient for the glow effect -->
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00ff9f;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#00ff9f;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#00ff9f;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Text shadow filter -->
+    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Scanline pattern -->
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="100%" height="4">
+      <rect width="100%" height="2" fill="transparent"/>
+      <rect width="100%" height="2" y="2" fill="#00ff9f" opacity="0.03"/>
+    </pattern>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#0a0a0a"/>
+  
+  <!-- Grid background -->
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  
+  <!-- Scanlines overlay -->
+  <rect width="100%" height="100%" fill="url(#scanlines)"/>
+  
+  <!-- Glow circle behind prompt -->
+  <circle cx="200" cy="200" r="80" fill="url(#glowGradient)" opacity="0.4"/>
+  
+  <!-- Terminal prompt ">_" -->
+  <text x="150" y="220" 
+        font-family="monospace" 
+        font-size="72" 
+        font-weight="bold" 
+        fill="#00ff9f" 
+        filter="url(#textGlow)">
+    >_
+  </text>
+  
+  <!-- Blinking cursor animation -->
+  <rect x="280" y="180" width="4" height="50" fill="#00ff9f" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.8;0;0" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Subtitle text -->
+  <text x="350" y="200" 
+        font-family="monospace" 
+        font-size="24" 
+        fill="#ff6b35" 
+        opacity="0.9">
+    PORTFOLIO.INIT
+  </text>
+  
+  <text x="350" y="230" 
+        font-family="monospace" 
+        font-size="18" 
+        fill="#64748b" 
+        opacity="0.7">
+    Ryan Van Valkenburg
+  </text>
+  
+  <!-- Glitch lines for retro effect -->
+  <rect x="0" y="100" width="120" height="2" fill="#00ff9f" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  
+  <rect x="680" y="180" width="100" height="1" fill="#ff6b35" opacity="0.4">
+    <animate attributeName="opacity" values="0.4;0.4;0;0.4" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+  
+  <rect x="20" y="320" width="80" height="1" fill="#6366f1" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0;0.5;0.5" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Data stream effect -->
+  <g opacity="0.3">
+    <rect x="50" y="0" width="2" height="20" fill="#00ff9f">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,400; 0,-20" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="150" y="0" width="1" height="15" fill="#ff6b35">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,400; 0,-15" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="650" y="0" width="2" height="25" fill="#6366f1">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,400; 0,-25" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg> 

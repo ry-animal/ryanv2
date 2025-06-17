@@ -16,7 +16,7 @@ export function generateMetadata({
     title,
     description,
     keywords = [],
-    ogImage = "/images/og-default.jpg",
+    ogImage,
     canonicalUrl,
     type = "website",
     publishedTime,
@@ -25,8 +25,20 @@ export function generateMetadata({
 }: MetaTagsProps): Metadata {
     const siteName = "Ryan Van Valkenburg - Full-Stack Developer";
     const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ryanvanValkenburg.com";
-    const imageUrl = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rv2.dev";
+
+    // Generate dynamic OG image if not provided
+    let imageUrl: string;
+    if (!ogImage) {
+        const ogParams = new URLSearchParams({
+            title: title,
+            subtitle: type === "article" ? "Project Showcase" : "Full-Stack Developer",
+            type: type === "article" ? "project" : "default",
+        });
+        imageUrl = `${baseUrl}/api/og?${ogParams.toString()}`;
+    } else {
+        imageUrl = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
+    }
 
     return {
         title: fullTitle,
@@ -69,7 +81,8 @@ export function generateMetadata({
             title: fullTitle,
             description,
             images: [imageUrl],
-            creator: "@ryanvanValkenburg", // Replace with actual Twitter handle
+            creator: "@ry-animal",
+            site: "@ryan7vv",
         },
         alternates: {
             canonical: canonicalUrl || baseUrl,
@@ -89,12 +102,12 @@ export function generatePersonStructuredData() {
         name: "Ryan Van Valkenburg",
         jobTitle: "Full-Stack Developer",
         description: "Full-stack developer specializing in React, Next.js, and modern web technologies",
-        url: "https://ryanvanValkenburg.com",
-        image: "https://ryanvanValkenburg.com/images/profile.jpg",
+        url: "https://rv2.dev",
+        image: "https://rv2.dev/images/retro-prompt.svg",
         sameAs: [
-            "https://github.com/ryanvanValkenburg", // Replace with actual URLs
-            "https://linkedin.com/in/ryanvanValkenburg",
-            "https://twitter.com/ryanvanValkenburg",
+            "https://github.com/ry-animal",
+            "https://www.linkedin.com/in/ryanlvv/",
+            "https://twitter.com/ryan7vv",
         ],
         knowsAbout: [
             "JavaScript",
@@ -126,14 +139,14 @@ export function generateWebsiteStructuredData() {
         "@type": "WebSite",
         name: "Ryan Van Valkenburg - Full-Stack Developer",
         description: "Portfolio website showcasing full-stack development projects and skills",
-        url: "https://ryanvanValkenburg.com",
+        url: "https://rv2.dev",
         author: {
             "@type": "Person",
             name: "Ryan Van Valkenburg",
         },
         potentialAction: {
             "@type": "SearchAction",
-            target: "https://ryanvanValkenburg.com/search?q={search_term_string}",
+            target: "https://rv2.dev/search?q={search_term_string}",
             "query-input": "required name=search_term_string",
         },
     };

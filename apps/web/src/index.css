@@ -33,23 +33,23 @@ body {
 	}
 }
 
-/* Light Theme - Retro but brighter */
+/* Light Theme - Better contrast */
 :root {
 	--radius: 0.625rem;
 	
-	/* Light retro theme */
-	--retro-dark: oklch(0.95 0 0);           /* Light background */
-	--retro-darker: oklch(0.98 0 0);         /* Even lighter for cards */
-	--retro-light: oklch(0.08 0 0);          /* Dark text */
-	--retro-muted: oklch(0.45 0 0);          /* Muted dark text */
+	/* Light retro theme with better contrast */
+	--retro-dark: oklch(0.98 0 0);           /* Very light background */
+	--retro-darker: oklch(0.95 0 0);         /* Light cards */
+	--retro-light: oklch(0.15 0 0);          /* Dark text for contrast */
+	--retro-muted: oklch(0.45 0 0);          /* Medium gray text */
 	
-	/* Neon Accent Colors (adjusted for light theme) */
-	--retro-teal: oklch(0.45 0.18 180);      /* Darker teal */
-	--retro-orange: oklch(0.5 0.22 45);      /* Darker orange */
-	--retro-indigo: oklch(0.35 0.15 270);    /* Darker indigo */
-	--retro-magenta: oklch(0.4 0.25 320);    /* Darker magenta */
-	--retro-cyan: oklch(0.5 0.18 195);       /* Darker cyan */
-	--retro-amber: oklch(0.55 0.2 65);       /* Darker amber */
+	/* Neon Accent Colors (darker for light theme) */
+	--retro-teal: oklch(0.4 0.2 180);        /* Darker teal */
+	--retro-orange: oklch(0.45 0.25 45);     /* Darker orange */
+	--retro-indigo: oklch(0.3 0.18 270);     /* Darker indigo */
+	--retro-magenta: oklch(0.35 0.28 320);   /* Darker magenta */
+	--retro-cyan: oklch(0.4 0.2 195);        /* Darker cyan */
+	--retro-amber: oklch(0.5 0.22 65);       /* Darker amber */
 	
 	/* UI Color Mappings */
 	--background: var(--retro-dark);
@@ -139,11 +139,24 @@ body {
 @layer base {
 	* {
 		@apply border-border outline-ring/50;
+		/* Ensure all interactive elements have proper cursor */
+		cursor: inherit;
 	}
+	
 	body {
 		@apply bg-background text-foreground font-mono;
 		position: relative;
 		transition: background-color 0.3s ease, color 0.3s ease;
+		cursor: default;
+	}
+	
+	/* Proper cursor states */
+	button, a, [role="button"], input, textarea, select {
+		cursor: pointer;
+	}
+	
+	input[type="text"], input[type="email"], textarea {
+		cursor: text;
 	}
 	
 	/* Subtle CRT scanline overlay - only in dark mode */
@@ -176,28 +189,28 @@ body {
 		height: 100%;
 		background: linear-gradient(
 			transparent 0%,
-			rgba(100, 100, 100, 0.01) 50%,
+			rgba(100, 100, 100, 0.005) 50%,
 			transparent 51%,
 			transparent 100%
 		);
 		background-size: 100% 8px;
 		pointer-events: none;
 		z-index: 1000;
-		opacity: 0.2;
+		opacity: 0.1;
 	}
 	
 	.dark body::after {
 		display: none;
 	}
 	
-	/* Text glow effects for headings - stronger in dark mode */
+	/* Text glow effects for headings - theme aware */
 	h1, h2, h3, h4, h5, h6 {
-		text-shadow: 0 0 8px currentColor;
+		text-shadow: 0 0 6px transparent;
 		transition: text-shadow 0.3s ease;
 	}
 	
 	.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-		text-shadow: 0 0 12px currentColor;
+		text-shadow: 0 0 10px rgba(var(--primary), 0.3);
 	}
 }
 
@@ -259,6 +272,7 @@ body {
 	position: relative;
 	overflow: hidden;
 	transition: all 0.3s ease;
+	cursor: pointer;
 }
 
 .retro-glow::before {
@@ -271,18 +285,19 @@ body {
 	background: linear-gradient(
 		90deg,
 		transparent,
-		rgba(255, 255, 255, 0.2),
+		rgba(255, 255, 255, 0.15),
 		transparent
 	);
 	transition: left 0.6s ease;
 	z-index: 1;
+	pointer-events: none;
 }
 
 .dark .retro-glow::before {
 	background: linear-gradient(
 		90deg,
 		transparent,
-		rgba(0, 255, 200, 0.4),
+		rgba(0, 255, 200, 0.3),
 		transparent
 	);
 }
@@ -313,11 +328,11 @@ body {
 .depth-2 { transform: translateZ(20px); }
 .depth-3 { transform: translateZ(30px); }
 
-/* Retro grid background - adjusted for theme */
+/* Retro grid background - better theme adaptation */
 .retro-grid {
 	background-image: 
-		linear-gradient(rgba(100, 100, 100, 0.1) 1px, transparent 1px),
-		linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+		linear-gradient(rgba(100, 100, 100, 0.08) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(100, 100, 100, 0.08) 1px, transparent 1px);
 	background-size: 50px 50px;
 	animation: retro-flicker 4s infinite;
 	transition: background-image 0.3s ease;
@@ -333,8 +348,8 @@ body {
 .crt-monitor {
 	border-radius: 25px;
 	box-shadow: 
-		inset 0 0 50px rgba(0, 0, 0, 0.3),
-		0 0 100px rgba(100, 100, 100, 0.1);
+		inset 0 0 50px rgba(0, 0, 0, 0.1),
+		0 0 100px rgba(100, 100, 100, 0.05);
 	transition: box-shadow 0.3s ease;
 }
 

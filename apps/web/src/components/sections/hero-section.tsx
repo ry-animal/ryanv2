@@ -126,8 +126,8 @@ export default function HeroSection() {
                             <span className="text-accent">$</span> cat bio.txt
                             <br />
                             <span className="text-muted-foreground">
-                                Experienced software engineer with 10+ years building scalable applications at Microsoft, GameStop, Boeing, AI, and DeFi/web3 startups.
-                                Specializing in React, Next.js, TypeScript, and blockchain technologies with a proven track record of leading teams and delivering high-impact solutions.
+                                Experienced software engineer with 9 years building scalable applications at Microsoft, GameStop, Boeing, AI, and DeFi/web3 startups.
+                                Specializing in Fullstack with React, Next.js, TypeScript, Golang, AI and blockchain technologies with a proven track record of leading teams and delivering high-impact solutions.
                             </span>
                         </motion.div>
                     </motion.div>
@@ -169,7 +169,7 @@ export default function HeroSection() {
                                     variant="outline"
                                     size="lg"
                                     asChild
-                                    className="min-w-[140px] retro-glow border-accent text-accent hover:bg-accent hover:text-accent-foreground font-mono transition-all duration-300"
+                                    className="min-w-[140px] retro-glow border-orange-500/70 text-orange-500 hover:border-orange-500 hover:text-orange-500 font-mono transition-all duration-300 shadow-sm hover:shadow-md"
                                 >
                                     <Link href="#contact">
                                         {"> Contact Me"}

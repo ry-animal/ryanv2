@@ -65,13 +65,13 @@ export default function AboutSection() {
                                         architected complex systems, and delivered products serving millions of users.
                                     </p>
                                     <p>
-                                        My expertise spans full-stack development, blockchain technologies, and cloud infrastructure.
+                                        My expertise spans full-stack development, cloud infrastructure, and AI and blockchain technologies.
                                         From developing Minecraft.net at Microsoft to building DeFi protocols with $110M+ TVL,
-                                        I specialize in React, Next.js, TypeScript, and emerging web3 technologies like wagmi, viem, and smart contracts.
+                                        I specialize in React, Next.js, TypeScript, Golang, and emerging AI and web3 technologies like langchain, langgraph, huggingface, n8n, wagmi, viem, and smart contracts.
                                     </p>
                                     <p>
                                         I thrive in fast-paced environments, leading technical migrations, implementing modern architectures,
-                                        and mentoring teams. My experience ranges from enterprise applications to cutting-edge blockchain solutions,
+                                        and mentoring teams. My experience ranges from enterprise applications to cutting-edge AI andblockchain solutions,
                                         always focusing on scalability, performance, and exceptional user experiences.
                                     </p>
                                 </div>

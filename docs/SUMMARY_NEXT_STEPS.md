@@ -60,7 +60,23 @@ Successfully transformed Better-T-Stack monorepo boilerplate into a professional
 
 ## 🚀 Latest Context Window Achievements
 
-### Enhanced Hero Section with Dynamic Typewriter Animation
+### Fixed Critical UX Issues (Current Session)
+
+- ✅ **Resolved Theme Toggle & Resume Button Hover Issues**:
+
+  - Fixed buttons disappearing when hovered over in both light/dark modes
+  - Replaced problematic CSS custom properties with explicit orange colors (`orange-500`)
+  - Added proper `cursor: pointer` states for all interactive elements
+  - Enhanced with Framer Motion scale animations (`whileHover={{ scale: 1.02 }}`)
+  - Maintained retro-futuristic orange glow aesthetic consistency
+
+- ✅ **Enhanced Interactive States**:
+  - Consistent orange color scheme across theme toggle and resume button
+  - Smooth transitions (300ms duration) for better tactile feedback
+  - Proper hover effects that work reliably in both themes
+  - Improved accessibility with clear visual feedback
+
+### Enhanced Hero Section with Dynamic Typewriter Animation (Previous Session)
 
 - ✅ **Character-by-character typewriter effect** cycling through 4 phrases:
   - "Ryan Van Valkenburg" → "Senior Software Engineer" → "Web3 Specialist" → "AI Connoisseur"
@@ -69,7 +85,7 @@ Successfully transformed Better-T-Stack monorepo boilerplate into a professional
 - ✅ **Mobile optimization** to show bouncing scroll arrow
 - ✅ **Removed hover interactions** for cleaner UX
 
-### Complete Mobile Navigation Overhaul
+### Complete Mobile Navigation Overhaul (Previous Session)
 
 - ✅ **Migrated from custom Framer Motion to shadcn Sheet component**
 - ✅ **Automatic accessibility**: click-outside, escape key, focus management
@@ -78,16 +94,18 @@ Successfully transformed Better-T-Stack monorepo boilerplate into a professional
 - ✅ **Clean styling**: rounded bottom-left corner, left/bottom borders only
 - ✅ **Centered navigation items** with proper spacing
 
-### Header & Layout Improvements
+### Header & Layout Improvements (Previous Session)
 
 - ✅ **Changed header brand** from "Ryan Van Valkenburg" to "Home" for cleaner navigation
 - ✅ **Fixed header transparency** and backdrop blur settings
 - ✅ **Improved mobile overlay** opacity and blur effects
 - ✅ **Fixed hero section z-index** layering with header
 
-### Code Quality Achievement
+### Code Quality Achievements
 
-**Major Technical Win:** Replaced 80+ lines of custom mobile nav logic with 25 lines using shadcn Sheet component, gaining better UX, accessibility, and maintainability.
+**Latest Win:** Successfully resolved theme-based visibility issues by migrating from CSS custom properties to explicit Tailwind colors, ensuring consistent UX across all themes.
+
+**Previous Major Win:** Replaced 80+ lines of custom mobile nav logic with 25 lines using shadcn Sheet component, gaining better UX, accessibility, and maintainability.
 
 ## 📊 Previously Completed Enhancements
 

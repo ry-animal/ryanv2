@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { skeletonPulse } from "@/lib/animations";
+import { retroSkeletonPulse } from "@/lib/animations";
 
 interface SkeletonProps {
 	className?: string;
@@ -12,7 +12,7 @@ interface SkeletonProps {
 export function Skeleton({ className, children, ...props }: SkeletonProps) {
 	return (
 		<motion.div
-			variants={skeletonPulse}
+			variants={retroSkeletonPulse}
 			initial="initial"
 			animate="animate"
 			className={cn(

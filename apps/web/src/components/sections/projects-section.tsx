@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const mockProjects = [
     {
-        id: 1,
+        id: "1",
         slug: "better-t-stack-portfolio",
         title: "Modern Portfolio Website",
         description: "A performant portfolio built with Next.js 15, featuring Server Components, Framer Motion animations, and 95+ Lighthouse scores.",
@@ -19,7 +19,7 @@ const mockProjects = [
         featured: true,
     },
     {
-        id: 2,
+        id: "2",
         slug: "saas-dashboard",
         title: "SaaS Analytics Dashboard",
         description: "Real-time analytics dashboard with interactive charts, user management, and subscription billing integration.",
@@ -30,13 +30,13 @@ const mockProjects = [
         featured: true,
     },
     {
-        id: 3,
+        id: "3",
         slug: "ai-content-generator",
         title: "AI Content Generator",
         description: "AI-powered content creation tool with GPT integration, template management, and collaborative editing features.",
         technologies: JSON.stringify(["Next.js", "OpenAI API", "PostgreSQL", "tRPC", "Prisma"]),
         githubUrl: "https://github.com/ry-animal/ai-content-gen",
-        liveUrl: null,
+        liveUrl: undefined,
         imageUrl: "/images/tasks-preview.jpg",
         featured: false,
     },

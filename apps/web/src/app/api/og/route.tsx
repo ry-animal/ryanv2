@@ -3,6 +3,9 @@ import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
+// Cache OG images for 1 hour
+export const revalidate = 3600;
+
 export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
@@ -292,12 +295,19 @@ export async function GET(request: NextRequest) {
             {
                 width: 1200,
                 height: 630,
+                headers: {
+                    'Cache-Control': 'public, immutable, no-transform, max-age=31536000',
+                    'CDN-Cache-Control': 'public, max-age=31536000',
+                },
             }
         );
-    } catch (e) {
-        console.log('Failed to generate OG image:', e);
-        return new Response('Failed to generate the image', {
+    } catch (e: any) {
+        console.error('Failed to generate OG image:', e);
+        return new Response(`Failed to generate the image: ${e.message}`, {
             status: 500,
+            headers: {
+                'Content-Type': 'text/plain',
+            },
         });
     }
 } 

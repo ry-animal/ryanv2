@@ -24,23 +24,26 @@ const spaceGrotesk = Space_Grotesk({
 	display: "swap",
 });
 
-export const metadata: Metadata = generateMetadata({
-	title: "Ryan Van Valkenburg - Full-Stack Developer",
-	description: "Full-stack developer specializing in React, Next.js, and modern web technologies. Creating beautiful, scalable applications with exceptional user experiences.",
-	keywords: [
-		"Full-Stack Developer",
-		"React Developer",
-		"Next.js Developer",
-		"TypeScript Developer",
-		"Web Developer",
-		"JavaScript",
-		"Node.js",
-		"PostgreSQL",
-		"UI/UX Design",
-		"Portfolio",
-		"San Francisco",
-	],
-});
+export const metadata: Metadata = {
+	metadataBase: new URL("https://rv2.dev"),
+	...generateMetadata({
+		title: "Ryan Van Valkenburg - Full-Stack Developer",
+		description: "Full-stack developer specializing in React, Next.js, and modern web technologies. Creating beautiful, scalable applications with exceptional user experiences.",
+		keywords: [
+			"Full-Stack Developer",
+			"React Developer",
+			"Next.js Developer",
+			"TypeScript Developer",
+			"Web Developer",
+			"JavaScript",
+			"Node.js",
+			"PostgreSQL",
+			"UI/UX Design",
+			"Portfolio",
+			"San Francisco",
+		],
+	}),
+};
 
 export default function RootLayout({
 	children,
